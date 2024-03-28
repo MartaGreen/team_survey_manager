@@ -29,29 +29,35 @@ public class MainController implements Controller {
     private User user;
 
     public void initialize() {
-        this.user = Main.getCurrentUser();
-
         setupPage();
     }
 
     public void setupPage() {
+        this.user = Main.getCurrentUser();
+
         fullName.setText(getUserFullName(user));
         teamLabel.setText(user.getTeam());
         ArrayList<Employee> employees = Main.getCorporation().getEmployees();
         for (Employee employee: employees) {
-            switchBetweenUsersBar.getItems().add(employee.getName());
+            switchBetweenUsersBar.getItems().add(getUserFullName(employee));
         };
-        switchBetweenUsersBar.setValue(getUserFullName(employees.getFirst()));
+        switchBetweenUsersBar.setValue(getUserFullName(this.user));
+        switchToUser();
     }
 
     private String getUserFullName(Employee user) {
-        return user.getName() + " " + user.getSurname();
+        return (user.getName() + " " + user.getSurname());
     }
 
     private void switchToUser() {
         switchBetweenUsersBar.setOnAction(event -> {
-            String selectedOption = (String) switchBetweenUsersBar.getSelectionModel().getSelectedItem();
+            String selectedUser = (String) switchBetweenUsersBar.getSelectionModel().getSelectedItem();
+            System.out.println(selectedUser);
+            switchBetweenUsersBar.setValue(selectedUser);
 
+            Main.setCurrentUser(selectedUser);
+
+            setupPage();
         });
     }
 }

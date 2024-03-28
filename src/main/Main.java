@@ -50,9 +50,14 @@ public class Main extends Application {
     public static void setCurrentUser(Employee employee) {
         currentUser = new User(employee, corporation.surveyManager);
     }
-
     public static void setCurrentUser(String fullName) {
-
+        for (Employee employee: corporation.getEmployees()) {
+            if (employee.compareEmployee(fullName)) {
+                currentUser = new User(employee, corporation.surveyManager);
+                System.out.println("USer was updated to " + currentUser.getName());
+                return;
+            };
+        }
     }
 
     public static User getCurrentUser() {

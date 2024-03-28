@@ -5,8 +5,6 @@ import survey.SurveyManager;
 
 import java.util.ArrayList;
 
-import static employees.Employee.compareEmployee;
-
 public class Corporation {
     private final String name;
     private final ArrayList<Employee> employees;
@@ -28,7 +26,7 @@ public class Corporation {
 
     public Employee findEmployee(String name, String surname) {
         for (Employee employee: this.getEmployees()) {
-            if (compareEmployee(employee, name, surname)) {
+            if (employee.compareEmployee(name, surname)) {
                 return employee;
             }
         }

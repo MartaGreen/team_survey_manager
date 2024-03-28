@@ -45,7 +45,10 @@ public abstract class Employee{
 
     //return 1 if it is current employee
     // return 0 if it isn't current employee
-    public static boolean compareEmployee(Employee checkedEmployee, String name, String surname) {
-        return (checkedEmployee.getName().equals(name) && checkedEmployee.getSurname().equals(surname));
+    public boolean compareEmployee(String name, String surname) {
+        return (this.getName().equals(name) && this.getSurname().equals(surname));
+    }
+    public boolean compareEmployee(String fullName) {
+        return ((this.getName() + " " + this.getSurname()).equals(fullName));
     }
 }

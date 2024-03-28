@@ -4,8 +4,6 @@ import employees.Employee;
 
 import java.util.ArrayList;
 
-import static employees.Employee.compareEmployee;
-
 public class SurveyOption {
    private final ArrayList<Employee> voters = new ArrayList<>();
     private String text;
