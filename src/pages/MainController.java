@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import main.Main;
+import survey.Survey;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class MainController implements Controller {
 
     public void setupPage() {
         this.user = Main.getCurrentUser();
+        user.update();
 
         fullName.setText(getUserFullName(user));
         teamLabel.setText(user.getTeam());
@@ -43,6 +45,15 @@ public class MainController implements Controller {
         };
         switchBetweenUsersBar.setValue(getUserFullName(this.user));
         switchToUser();
+
+        ArrayList<Survey> openedSurveys = user.getOpenedSurveys();
+        ArrayList<Survey> personalSurveys = user.getPersonalSurveys();
+
+        System.out.print("Personal surveys " + personalSurveys + "\n");
+        personalSurveysBox.getChildren().clear();
+        if (personalSurveys != null) {
+            personalSurveys.forEach(survey -> personalSurveysBox.getChildren().add(new Text(survey.getSurveyName())));
+        }
     }
 
     private String getUserFullName(Employee user) {
@@ -59,5 +70,10 @@ public class MainController implements Controller {
 
             setupPage();
         });
+    }
+
+    @FXML
+    private void createNewSurvey(ActionEvent event) throws IOException {
+        switchToPage(event, "newSurvey.fxml");
     }
 }

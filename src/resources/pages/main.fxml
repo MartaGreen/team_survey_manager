@@ -44,6 +44,6 @@
                 <Font size="18.0" />
             </font>
         </Label>
-        <Button layoutX="672.0" layoutY="206.0" mnemonicParsing="false" text="new survey" />
+        <Button layoutX="672.0" layoutY="206.0" mnemonicParsing="false" onAction="#createNewSurvey" text="new survey" />
     </children>
 </AnchorPane>

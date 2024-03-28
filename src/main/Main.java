@@ -54,7 +54,6 @@ public class Main extends Application {
         for (Employee employee: corporation.getEmployees()) {
             if (employee.compareEmployee(fullName)) {
                 currentUser = new User(employee, corporation.surveyManager);
-                System.out.println("USer was updated to " + currentUser.getName());
                 return;
             };
         }

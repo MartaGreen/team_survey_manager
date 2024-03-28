@@ -19,11 +19,13 @@ public class User extends Employee {
         this.userId = UUID.randomUUID().toString();
 
         setupSurveys();
+        setupPersonalSurveys();
     }
 
     public ArrayList<Survey> getPersonalSurveys() {
         return personalSurveys;
     }
+    public ArrayList<Survey> getOpenedSurveys() { return surveys; }
 
     public void setupSurveys() {
         this.surveys = surveyManager.getEmployeeSurveys(this);
