@@ -3,6 +3,8 @@ module main.Main {
     requires  javafx.controls;
     requires  javafx.graphics;
 
-    opens main to javafx.fxml;
+    opens pages to javafx.fxml;
+    exports pages;
     exports main;
+    exports employees;
 }
