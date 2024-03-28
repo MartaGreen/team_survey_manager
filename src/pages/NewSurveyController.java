@@ -26,4 +26,8 @@ public class NewSurveyController {
         switchToPage(event, "main.fxml");
     }
 
+    @FXML
+    private void goBack(ActionEvent event) throws IOException {
+        switchToPage(event, "main.fxml");
+    }
 }
