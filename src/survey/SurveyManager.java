@@ -2,11 +2,25 @@ package survey;
 
 import account.User;
 import employees.Employee;
+import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import main.Main;
 
 import java.util.ArrayList;
 
 public class SurveyManager {
-    ArrayList<Survey> surveys = new ArrayList<>();
+    private ArrayList<Survey> surveysArr = new ArrayList<>();;
+    ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
+
+    public SurveyManager() {
+        surveys.addListener((ListChangeListener) change -> Main.getCurrentUser().update());
+    }
 
     public ArrayList<Survey> getEmployeeSurveys(User user) {
         if (surveys == null) return null;
@@ -33,8 +47,10 @@ public class SurveyManager {
         return personalSurveys;
     }
 
-    public void createNewSurvey(String name, ArrayList<String> options, User owner) {
-        Survey newSurvey = new Survey(name, options, owner);
+    public void createNewSurvey(String name, ObservableList<String> teams, User owner) {
+        System.out.print(teams);
+        ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
+        Survey newSurvey = new Survey(name, participantsArr, owner);
         surveys.add(newSurvey);
     }
 }

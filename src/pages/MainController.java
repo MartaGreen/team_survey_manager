@@ -35,7 +35,7 @@ public class MainController implements Controller {
 
     public void setupPage() {
         this.user = Main.getCurrentUser();
-        user.update();
+//        user.update();
 
         fullName.setText(getUserFullName(user));
         teamLabel.setText(user.getTeam());
@@ -48,6 +48,12 @@ public class MainController implements Controller {
 
         ArrayList<Survey> openedSurveys = user.getOpenedSurveys();
         ArrayList<Survey> personalSurveys = user.getPersonalSurveys();
+
+        System.out.print("Opened surveys " + openedSurveys + "\n");
+        openedSurveysBox.getChildren().clear();
+        if (openedSurveysBox != null) {
+            openedSurveys.forEach(survey -> openedSurveysBox.getChildren().add(new Text(survey.getSurveyName())));
+        }
 
         System.out.print("Personal surveys " + personalSurveys + "\n");
         personalSurveysBox.getChildren().clear();

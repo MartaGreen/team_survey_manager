@@ -5,20 +5,19 @@ import survey.Survey;
 import survey.SurveyManager;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class User extends Employee {
     private ArrayList<Survey> surveys;
     private ArrayList<Survey> personalSurveys;
     private SurveyManager surveyManager;
-    private final String userId;
+    private String userId;
 
     public User(Employee employee, SurveyManager surveyManager) {
         super(employee.getName(), employee.getSurname(), employee.getExperience(), employee.getTeam());
         this.surveyManager = surveyManager;
-        this.userId = UUID.randomUUID().toString();
+        this.setId(employee.getId());
 
-        setupSurveys();
+        setupOpenedSurveys();
         setupPersonalSurveys();
     }
 
@@ -27,7 +26,7 @@ public class User extends Employee {
     }
     public ArrayList<Survey> getOpenedSurveys() { return surveys; }
 
-    public void setupSurveys() {
+    public void setupOpenedSurveys() {
         this.surveys = surveyManager.getEmployeeSurveys(this);
     }
 
@@ -36,7 +35,7 @@ public class User extends Employee {
     }
 
     public void update() {
-        setupSurveys();
+        setupOpenedSurveys();
         setupPersonalSurveys();
     }
 }

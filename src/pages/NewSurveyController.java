@@ -1,8 +1,11 @@
 package pages;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import main.Main;
 
 import java.io.IOException;
@@ -13,16 +16,24 @@ import static pages.Router.switchToPage;
 public class NewSurveyController {
     @FXML
     private TextField surveyNameField;
+    @FXML
+    private ListView participantsBox;
 
     @FXML
     public void initialize() {
-
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "product", "manager", "design", "frontend", "backend"
+        );
+        participantsBox.setItems(items);
+        participantsBox.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
     }
 
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
         String name = surveyNameField.getText();
-        Main.getCorporation().surveyManager.createNewSurvey(name, new ArrayList<>(), Main.getCurrentUser());
+        ObservableList<String> selectedTeams = participantsBox.getSelectionModel().getSelectedItems();
+
+        Main.getCorporation().surveyManager.createNewSurvey(name, selectedTeams, Main.getCurrentUser());
         switchToPage(event, "main.fxml");
     }
 

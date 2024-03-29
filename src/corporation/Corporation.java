@@ -1,6 +1,7 @@
 package corporation;
 
 import employees.Employee;
+import javafx.collections.ObservableList;
 import survey.SurveyManager;
 
 import java.util.ArrayList;
@@ -24,13 +25,12 @@ public class Corporation {
         return employees;
     }
 
-    public Employee findEmployee(String name, String surname) {
-        for (Employee employee: this.getEmployees()) {
-            if (employee.compareEmployee(name, surname)) {
-                return employee;
-            }
+    public ArrayList<Employee> findEmployee(ObservableList<String> teams) {
+        ArrayList<Employee> chosenEmployees = new ArrayList<>();
+        for (Employee empl: employees) {
+            if (teams.contains(empl.getTeam())) chosenEmployees.add(empl);
         }
 
-        return null;
+        return chosenEmployees;
     }
 }

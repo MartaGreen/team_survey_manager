@@ -1,18 +1,27 @@
 package employees;
 
 import java.util.Collection;
+import java.util.UUID;
 
 public abstract class Employee{
     private String name;
     private String surname;
     private float experience;
     private String team;
+    private String id;
 
     protected Employee(String name, String surname, float experience, String team) {
         this.name = name;
         this.surname = surname;
         this.experience = experience;
         this.team = team;
+        this.id = UUID.randomUUID().toString();
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String newId) {
+        this.id = newId;
     }
 
     public String getName() {

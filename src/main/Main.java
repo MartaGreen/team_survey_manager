@@ -5,6 +5,7 @@ import corporation.Corporation;
 import employees.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import survey.SurveyManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import static pages.Router.loadInitialPage;
 public class Main extends Application {
     private static Corporation corporation;
     private static User currentUser;
+    private static SurveyManager surveyManager;
     public static void main(String[] args) {
         generateDefaultCorp();
         launch(args);
@@ -45,15 +47,15 @@ public class Main extends Application {
 
     public static void setCorporation(Corporation corp) {
         corporation = corp;
+        surveyManager = corp.surveyManager;
     }
-
     public static void setCurrentUser(Employee employee) {
-        currentUser = new User(employee, corporation.surveyManager);
+        currentUser = new User(employee, surveyManager);
     }
     public static void setCurrentUser(String fullName) {
         for (Employee employee: corporation.getEmployees()) {
             if (employee.compareEmployee(fullName)) {
-                currentUser = new User(employee, corporation.surveyManager);
+                currentUser = new User(employee,  surveyManager);
                 return;
             };
         }

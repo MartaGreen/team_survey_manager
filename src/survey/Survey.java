@@ -2,39 +2,33 @@ package survey;
 
 import account.User;
 import employees.Employee;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.UUID;
 
 public class Survey {
     private String surveyId;
-    private ArrayList<Employee> participants;
     private String description;
     private String name;
     private User owner;
-    private ArrayList<SurveyOption> options;
+    private ArrayList<Employee> participants;
 
-    Survey(String name, String description, ArrayList<Employee> participants) {
-        this.name = name;
-        this.description = description;
-        this.participants = participants;
-        this.surveyId = UUID.randomUUID().toString();
-    }
-
-    public Survey(String name, ArrayList<String> options, User owner) {
+    public Survey(String name, ArrayList<Employee> participants, User owner) {
         this.name = name;
         this.owner = owner;
         this.surveyId = UUID.randomUUID().toString();
-        this.options = new ArrayList<>();
-
-        for (String option: options) {
-            this.options.add(new SurveyOption(option, "singleChoice"));
-        }
+        this.participants = participants;
     }
 
     public boolean containEmployee(Employee employee) {
+        System.out.print("adfdf" + this.participants + " " + "\n");
         if (participants == null) return false;
-        return participants.contains(employee);
+        for (Employee empl: participants) {
+            System.out.printf("%s %s %s %s\n", empl.getId(), empl.getName(), employee.getId(), employee.getName());
+            if (empl.getId().equals(employee.getId())) return true;
+        }
+        return false;
     }
 
     public boolean checkOwner(User checkedOwner) {
