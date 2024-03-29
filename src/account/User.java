@@ -10,6 +10,8 @@ public class User extends Employee {
     private ArrayList<Survey> surveys;
     private ArrayList<Survey> personalSurveys;
     private SurveyManager surveyManager;
+
+    public Survey openedSurvey;
     private String userId;
 
     public User(Employee employee, SurveyManager surveyManager) {
@@ -37,5 +39,13 @@ public class User extends Employee {
     public void update() {
         setupOpenedSurveys();
         setupPersonalSurveys();
+    }
+
+    public void vote(String id) {
+        surveys.forEach(survey -> {
+            if (survey.getSurveyId().equals(id)) {
+                openedSurvey = survey;
+            }
+        });
     }
 }

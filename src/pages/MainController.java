@@ -4,8 +4,11 @@ import account.User;
 import employees.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
 import survey.Survey;
@@ -52,7 +55,7 @@ public class MainController implements Controller {
         System.out.print("Opened surveys " + openedSurveys + "\n");
         openedSurveysBox.getChildren().clear();
         if (openedSurveysBox != null) {
-            openedSurveys.forEach(survey -> openedSurveysBox.getChildren().add(new Text(survey.getSurveyName())));
+            openedSurveys.forEach(this::createSurveyField);
         }
 
         System.out.print("Personal surveys " + personalSurveys + "\n");
@@ -60,6 +63,35 @@ public class MainController implements Controller {
         if (personalSurveys != null) {
             personalSurveys.forEach(survey -> personalSurveysBox.getChildren().add(new Text(survey.getSurveyName())));
         }
+    }
+
+    private void createSurveyField(Survey survey) {
+        AnchorPane surveyContainer = new AnchorPane();
+        surveyContainer.prefWidth(700);
+        surveyContainer.setId(survey.getSurveyId());
+
+        Text surveyName = new Text(survey.getSurveyName());
+        surveyName.prefWidth(500);
+        surveyName.setText(survey.getSurveyName());
+        surveyName.setLayoutY(20);
+        surveyName.setFont(Font.font(16));
+
+        Button voteBtn = new Button("vote");
+        voteBtn.setLayoutX(650);
+        voteBtn.setLayoutY(10);
+
+        surveyContainer.getChildren().addAll(surveyName, voteBtn);
+
+        voteBtn.setOnAction(event -> {
+            try {
+                user.vote(survey.getSurveyId());
+                switchToPage(event, "survey.fxml");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        openedSurveysBox.getChildren().add(surveyContainer);
     }
 
     private String getUserFullName(Employee user) {

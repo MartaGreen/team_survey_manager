@@ -26,12 +26,12 @@
         <ComboBox fx:id="switchBetweenUsersBar" layoutX="617.0" layoutY="19.0" prefWidth="150.0" />
         <ScrollPane layoutX="40.0" layoutY="234.0" prefHeight="272.0" prefWidth="711.0">
             <content>
-                <VBox fx:id="personalSurveysBox" prefHeight="259.0" prefWidth="696.0" />
+                <VBox fx:id="personalSurveysBox" prefHeight="259.0" prefWidth="700.0" />
             </content>
         </ScrollPane>
         <ScrollPane layoutX="40.0" layoutY="548.0" prefHeight="281.0" prefWidth="711.0">
             <content>
-                <VBox fx:id="openedSurveysBox" prefHeight="269.0" prefWidth="699.0" />
+                <VBox fx:id="openedSurveysBox" prefHeight="269.0" prefWidth="700.0" />
             </content>
         </ScrollPane>
         <Label layoutX="43.0" layoutY="207.0" text="Personal surveys:">
