@@ -19,7 +19,7 @@ public class SurveyManager {
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
 
     public SurveyManager() {
-        surveys.addListener((ListChangeListener) change -> Main.getCurrentUser().update());
+        surveys.addListener((ListChangeListener<? super survey.Survey>) change -> Main.getCurrentUser().update());
     }
 
     public ArrayList<Survey> getEmployeeSurveys(User user) {

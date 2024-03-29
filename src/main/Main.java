@@ -38,7 +38,7 @@ public class Main extends Application {
         employees.add(new FrontendDeveloper("Alex", "Martinez", 6.7f, "frontend"));
         employees.add(new Designer("Olivia", "Garcia", 8.9f, "design"));
         employees.add(new Product("William", "Rodriguez", 1.2f, "product"));
-        employees.add(new Manager("Sophia", "Lopez", 9.4f, "account"));
+        employees.add(new Manager("Sophia", "Lopez", 9.4f, "manager"));
 
         Corporation corp = new Corporation("apple", employees);
         setCorporation(corp);

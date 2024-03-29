@@ -17,7 +17,7 @@ public class NewSurveyController {
     @FXML
     private TextField surveyNameField;
     @FXML
-    private ListView participantsBox;
+    private ListView<String> participantsBox;
 
     @FXML
     public void initialize() {

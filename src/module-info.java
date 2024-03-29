@@ -6,5 +6,8 @@ module main.Main {
     opens pages to javafx.fxml;
     exports pages;
     exports main;
+    exports corporation;
     exports employees;
+    exports survey;
+    exports account;
 }

@@ -21,7 +21,7 @@ public class MainController implements Controller {
     @FXML
     private Text teamLabel;
     @FXML
-    private ComboBox switchBetweenUsersBar;
+    private ComboBox<String> switchBetweenUsersBar;
     @FXML
     private VBox personalSurveysBox;
     @FXML
@@ -42,7 +42,7 @@ public class MainController implements Controller {
         ArrayList<Employee> employees = Main.getCorporation().getEmployees();
         for (Employee employee: employees) {
             switchBetweenUsersBar.getItems().add(getUserFullName(employee));
-        };
+        }
         switchBetweenUsersBar.setValue(getUserFullName(this.user));
         switchToUser();
 
@@ -68,7 +68,7 @@ public class MainController implements Controller {
 
     private void switchToUser() {
         switchBetweenUsersBar.setOnAction(event -> {
-            String selectedUser = (String) switchBetweenUsersBar.getSelectionModel().getSelectedItem();
+            String selectedUser = switchBetweenUsersBar.getSelectionModel().getSelectedItem();
             System.out.println(selectedUser);
             switchBetweenUsersBar.setValue(selectedUser);
 
