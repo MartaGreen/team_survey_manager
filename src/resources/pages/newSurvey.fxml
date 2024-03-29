@@ -38,13 +38,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextArea layoutX="79.0" layoutY="258.0" prefHeight="99.0" prefWidth="641.0" />
+      <TextArea fx:id="surveyDescriptionField" layoutX="79.0" layoutY="258.0" prefHeight="99.0" prefWidth="641.0" />
       <ScrollPane layoutX="79.0" layoutY="488.0" prefHeight="291.0" prefWidth="641.0">
          <content>
-            <VBox prefHeight="283.0" prefWidth="628.0" />
+            <VBox fx:id="surveyOptionsField" prefHeight="283.0" prefWidth="628.0" />
          </content>
       </ScrollPane>
-      <Button layoutX="645.0" layoutY="451.0" mnemonicParsing="false" text="add option" />
+      <Button layoutX="645.0" layoutY="451.0" mnemonicParsing="false" onAction="#addOption" text="add option" />
       <Button layoutX="14.0" layoutY="801.0" mnemonicParsing="false" onAction="#goBack" text="Back">
          <font>
             <Font size="18.0" />

@@ -47,10 +47,10 @@ public class SurveyManager {
         return personalSurveys;
     }
 
-    public void createNewSurvey(String name, ObservableList<String> teams, User owner) {
-        System.out.print(teams);
+    public void createNewSurvey(String name, ObservableList<String> teams, ArrayList<String> options) {
+        User owner = Main.getCurrentUser();
         ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
-        Survey newSurvey = new Survey(name, participantsArr, owner);
+        Survey newSurvey = new Survey(name, participantsArr, options, owner);
         surveys.add(newSurvey);
     }
 }
