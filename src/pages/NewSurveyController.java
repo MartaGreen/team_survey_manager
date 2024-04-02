@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
@@ -57,20 +58,31 @@ public class NewSurveyController {
 
     @FXML
     private void addOption(ActionEvent event) {
+        AnchorPane box = new AnchorPane();
+        box.prefWidth(600);
+
         TextField optionName =  new TextField();
-        optionName.prefWidth(600);
         optionName.setPromptText("option");
+        optionName.setLayoutY(5);
+        optionName.setLayoutX(5);
+        optionName.setPrefWidth(500);
+        optionName.setFont(Font.font(14));
 
         Button removeBtn = new Button();
         removeBtn.setText("remove");
-        removeBtn.setFont(Font.font(16));
+        removeBtn.setFont(Font.font(14));
         removeBtn.setOnAction(this::deleteOption);
+        removeBtn.setLayoutY(5);
+        removeBtn.setLayoutX(550);
 
-        surveyOptionsField.getChildren().add(optionName);
+        box.getChildren().addAll(optionName, removeBtn);
+
+        surveyOptionsField.getChildren().add(box);
     }
 
     public void deleteOption(ActionEvent event) {
         Parent employeeToDelete = ((Node)event.getSource()).getParent();
+        System.out.print(employeeToDelete);
         surveyOptionsField.getChildren().remove(employeeToDelete);
     }
 }
