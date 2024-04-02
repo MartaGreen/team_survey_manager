@@ -47,7 +47,7 @@ public class NewSurveyController {
             options.add(((TextField) option).getText());
         }
 
-        Main.getCorporation().surveyManager.createNewSurvey(name, selectedTeams, options);
+        Main.getSurveyManager().createNewSurvey(name, selectedTeams, options);
         switchToPage(event, "main.fxml");
     }
 

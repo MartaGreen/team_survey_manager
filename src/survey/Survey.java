@@ -13,14 +13,18 @@ public class Survey {
     private String name;
     private User owner;
     private ArrayList<Employee> participants;
-    private ArrayList<String> options;
+    private ArrayList<SurveyOption> options;
 
-    public Survey(String name, ArrayList<Employee> participants, ArrayList<String> options, User owner) {
+    public Survey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, User owner) {
         this.name = name;
         this.owner = owner;
         this.surveyId = UUID.randomUUID().toString();
         this.participants = participants;
-        this.options = options;
+
+        this.options = new ArrayList<>();
+        for (String opt: optionss) {
+            this.options.add(new SurveyOption(opt, "single"));
+        }
     }
 
     public boolean containEmployee(Employee employee) {
@@ -40,7 +44,20 @@ public class Survey {
     }
     public String getSurveyId() {return surveyId;}
 
-    public ArrayList<String> getSurveyOption() {
+    public ArrayList<SurveyOption> getSurveyOption() {
         return this.options;
+    }
+
+    public void vote(User user, String optionId) {
+        int votesNumber = 0;
+        for (SurveyOption option: options) {
+            if (option.getOptionId().equals(optionId)) option.addVoter(user);
+            else option.removeVoter(user);
+            votesNumber += option.getVotersSize();
+        }
+
+        for (SurveyOption option: options) {
+            option.recalculate(votesNumber);
+        }
     }
 }

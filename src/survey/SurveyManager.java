@@ -19,7 +19,11 @@ public class SurveyManager {
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
 
     public SurveyManager() {
-        surveys.addListener((ListChangeListener<? super survey.Survey>) change -> Main.getCurrentUser().update());
+        surveys.addListener((ListChangeListener<? super survey.Survey>) change -> {
+            System.out.print("Surveys was changed\nUpdate user\nUpdate current survey\n");
+            Main.getCurrentUser().update();
+            loadSurvey(Main.currentSurvey.getSurveyId());
+        });
     }
 
     public ArrayList<Survey> getEmployeeSurveys(User user) {
@@ -52,5 +56,18 @@ public class SurveyManager {
         ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
         Survey newSurvey = new Survey(name, participantsArr, options, owner);
         surveys.add(newSurvey);
+    }
+
+    public void loadSurvey(String id) {
+        surveys.forEach(survey -> {
+            if (survey.getSurveyId().equals(id)) {
+                Main.currentSurvey = survey;
+            }
+        });
+    }
+
+    public void voteInSurvey(String optionId) {
+        User user = Main.getCurrentUser();
+        Main.currentSurvey.vote(user, optionId);
     }
 }

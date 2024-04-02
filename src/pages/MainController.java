@@ -84,7 +84,7 @@ public class MainController implements Controller {
 
         voteBtn.setOnAction(event -> {
             try {
-                user.vote(survey.getSurveyId());
+                Main.getSurveyManager().loadSurvey(survey.getSurveyId());
                 switchToPage(event, "survey.fxml");
             } catch (IOException e) {
                 throw new RuntimeException(e);

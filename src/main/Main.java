@@ -5,6 +5,7 @@ import corporation.Corporation;
 import employees.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import survey.Survey;
 import survey.SurveyManager;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ public class Main extends Application {
     private static Corporation corporation;
     private static User currentUser;
     private static SurveyManager surveyManager;
+    public static Survey currentSurvey;
+
     public static void main(String[] args) {
         generateDefaultCorp();
         launch(args);
@@ -81,5 +84,8 @@ public class Main extends Application {
     }
     public static Corporation getCorporation() {
         return corporation;
+    }
+    public static SurveyManager getSurveyManager() {
+        return surveyManager;
     }
 }
