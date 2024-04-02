@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
@@ -56,5 +57,10 @@
          </font>
       </Label>
       <ListView fx:id="participantsBox" layoutX="281.0" layoutY="366.0" prefHeight="74.0" prefWidth="439.0" />
+      <CheckBox fx:id="multipleChoiceSetter" layoutX="606.0" layoutY="148.0" mnemonicParsing="false" text="multiple choice">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </CheckBox>
    </children>
 </AnchorPane>

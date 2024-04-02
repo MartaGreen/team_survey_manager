@@ -26,6 +26,8 @@ public class NewSurveyController {
     private ListView<String> participantsBox;
     @FXML
     private VBox surveyOptionsField;
+    @FXML
+    private CheckBox multipleChoiceSetter;
 
     @FXML
     public void initialize() {
@@ -43,11 +45,18 @@ public class NewSurveyController {
         ArrayList<String> options = new ArrayList<>();
 
         for (Node option: surveyOptionsField.getChildren()) {
-            System.out.print(option);
-            options.add(((TextField) option).getText());
+            AnchorPane box = (AnchorPane) option;
+            for (javafx.scene.Node node : box.getChildren()) {
+                if (node instanceof TextField) {
+                    System.out.print(option);
+                    options.add(((TextField) node).getText());
+                }
+            }
         }
 
-        Main.getSurveyManager().createNewSurvey(name, selectedTeams, options);
+        boolean isMultipleChoice = multipleChoiceSetter.isSelected();
+
+        Main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
         switchToPage(event, "main.fxml");
     }
 
@@ -67,6 +76,7 @@ public class NewSurveyController {
         optionName.setLayoutX(5);
         optionName.setPrefWidth(500);
         optionName.setFont(Font.font(14));
+        optionName.getStyleClass().add("optionName");
 
         Button removeBtn = new Button();
         removeBtn.setText("remove");

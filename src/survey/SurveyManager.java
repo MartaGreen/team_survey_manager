@@ -46,10 +46,12 @@ public class SurveyManager {
         return personalSurveys;
     }
 
-    public void createNewSurvey(String name, ObservableList<String> teams, ArrayList<String> options) {
+    public void createNewSurvey(String name, ObservableList<String> teams, ArrayList<String> options, boolean isMultipleChoice) {
         User owner = Main.getCurrentUser();
         ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
-        Survey newSurvey = new Survey(name, participantsArr, options, owner);
+        Survey newSurvey;
+        if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, participantsArr, options, owner);
+        else newSurvey = new Survey(name, participantsArr, options, owner);
         surveys.add(newSurvey);
     }
 
@@ -64,5 +66,9 @@ public class SurveyManager {
     public void voteInSurvey(String optionId) {
         User user = Main.getCurrentUser();
         Main.currentSurvey.vote(user, optionId);
+    }
+    public void voteInSurvey(ArrayList<String> ids) {
+        User user = Main.getCurrentUser();
+        ((MultipleChoiceSurvey)Main.currentSurvey).vote(user, ids);
     }
 }

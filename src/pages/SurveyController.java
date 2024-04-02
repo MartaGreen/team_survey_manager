@@ -2,6 +2,8 @@ package pages;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -10,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
+import survey.MultipleChoiceSurvey;
 import survey.Survey;
 import survey.SurveyOption;
 
@@ -46,28 +49,51 @@ public class SurveyController {
             box.prefWidth(500);
             box.prefHeight(50);
 
-            RadioButton rbtn = new RadioButton(opt.getName());
-            rbtn.setId(opt.getOptionId());
-            rbtn.setToggleGroup(optionsGroup);
-            rbtn.setFont(Font.font(18));
-            rbtn.setSelected(opt.containsVoter(Main.getCurrentUser()));
-            rbtn.setLayoutY(10);
-
             Label percent = new Label();
             percent.setText(new DecimalFormat("#.##").format(opt.percentage * 100) + "%");
             percent.setLayoutX(450);
             percent.setLayoutY(10);
 
-            box.getChildren().addAll(rbtn, percent);
+            if (openedSurvey instanceof MultipleChoiceSurvey) {
+                CheckBox checkbox = new CheckBox(opt.getName());
+                checkbox.setId(opt.getOptionId());
+                checkbox.setFont(Font.font(18));
+                checkbox.setSelected(opt.containsVoter(Main.getCurrentUser()));
+                checkbox.setLayoutY(10);
+                box.getChildren().addAll(checkbox, percent);
+            }
+            else {
+                RadioButton rbtn = new RadioButton(opt.getName());
+                rbtn.setId(opt.getOptionId());
+                rbtn.setToggleGroup(optionsGroup);
+                rbtn.setFont(Font.font(18));
+                rbtn.setSelected(opt.containsVoter(Main.getCurrentUser()));
+                rbtn.setLayoutY(10);
+                box.getChildren().addAll(rbtn, percent);
+            }
+
             surveyOptionsBox.getChildren().add(box);
         }
     }
 
     @FXML
     private void vote() {
-        RadioButton chosenBtn = (RadioButton) optionsGroup.getSelectedToggle();
-        String id = chosenBtn.getId();
-        Main.getSurveyManager().voteInSurvey(id);
+        ArrayList<String>ids = new ArrayList<>();
+
+        for (Node node: surveyOptionsBox.getChildren()) {
+            AnchorPane box = (AnchorPane) node;
+            for (Node elem: box.getChildren()) {
+                if (elem instanceof RadioButton && ((RadioButton) elem).isSelected())
+                    ids.add(elem.getId());
+                if (elem instanceof CheckBox && ((CheckBox) elem).isSelected())
+                    ids.add(elem.getId());
+            }
+        }
+
+        if (ids.isEmpty()) return;
+        else if (ids.size() == 1) Main.getSurveyManager().voteInSurvey(ids.getFirst());
+        else Main.getSurveyManager().voteInSurvey(ids);
+
         setupOptions(Main.currentSurvey);
     }
 

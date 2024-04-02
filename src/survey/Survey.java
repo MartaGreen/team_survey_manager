@@ -12,7 +12,7 @@ public class Survey {
     private String name;
     private User owner;
     private ArrayList<Employee> participants;
-    private ArrayList<SurveyOption> options;
+    protected ArrayList<SurveyOption> options;
 
     public Survey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, User owner) {
         this.name = name;
