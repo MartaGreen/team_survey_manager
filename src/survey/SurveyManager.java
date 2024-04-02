@@ -2,11 +2,6 @@ package survey;
 
 import account.User;
 import employees.Employee;
-import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.IntegerBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -15,7 +10,7 @@ import main.Main;
 import java.util.ArrayList;
 
 public class SurveyManager {
-    private ArrayList<Survey> surveysArr = new ArrayList<>();;
+    private final ArrayList<Survey> surveysArr = new ArrayList<>();
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
 
     public SurveyManager() {

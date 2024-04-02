@@ -9,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import main.Main;
 
 import java.io.IOException;

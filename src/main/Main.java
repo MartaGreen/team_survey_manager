@@ -75,7 +75,7 @@ public class Main extends Application {
             if (employee.compareEmployee(fullName)) {
                 currentUser = new User(employee,  surveyManager);
                 return;
-            };
+            }
         }
     }
 

@@ -2,7 +2,6 @@ package survey;
 
 import account.User;
 import employees.Employee;
-import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.UUID;
