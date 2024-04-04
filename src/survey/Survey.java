@@ -6,7 +6,7 @@ import employees.Employee;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class Survey {
+abstract public class Survey {
     private String surveyId;
     private String description;
     private String name;
@@ -47,16 +47,5 @@ public class Survey {
         return this.options;
     }
 
-    public void vote(User user, String optionId) {
-        int votesNumber = 0;
-        for (SurveyOption option: options) {
-            if (option.getOptionId().equals(optionId)) option.addVoter(user);
-            else option.removeVoter(user);
-            votesNumber += option.getVotersSize();
-        }
-
-        for (SurveyOption option: options) {
-            option.recalculate(votesNumber);
-        }
-    }
+    public void vote(User user, String optionId) {}
 }

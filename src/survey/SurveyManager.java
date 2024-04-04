@@ -51,7 +51,7 @@ public class SurveyManager {
         ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
         Survey newSurvey;
         if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, participantsArr, options, owner);
-        else newSurvey = new Survey(name, participantsArr, options, owner);
+        else newSurvey = new SingleChoiceSurvey(name, participantsArr, options, owner);
         surveys.add(newSurvey);
     }
 
