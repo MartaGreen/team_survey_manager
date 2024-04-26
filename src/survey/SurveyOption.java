@@ -1,6 +1,5 @@
 package survey;
 
-import account.User;
 import employees.Employee;
 
 import java.util.ArrayList;
@@ -45,7 +44,7 @@ public class SurveyOption {
         percentage = participantsCount == 0 ? 0 : (double) voters.size() / participantsCount;
     }
 
-    public boolean containsVoter(User user) {
+    public boolean containsVoter(Employee user) {
         for (Employee voter: voters) {
             if (voter.getId().equals(user.getId())) return true;
         }

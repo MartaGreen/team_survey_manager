@@ -1,6 +1,5 @@
 package survey;
 
-import account.User;
 import employees.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -21,7 +20,7 @@ public class SurveyManager {
         });
     }
 
-    public ArrayList<Survey> getEmployeeSurveys(User user) {
+    public ArrayList<Survey> getEmployeeSurveys(Employee user) {
         if (surveys == null) return null;
 
         ArrayList<Survey> employeeSurveys = new ArrayList<>();
@@ -33,7 +32,7 @@ public class SurveyManager {
         return employeeSurveys;
     }
 
-    public ArrayList<Survey> getPersonalSurveys(User user) {
+    public ArrayList<Survey> getPersonalSurveys(Employee user) {
         if (surveys == null) return null;
 
         ArrayList<Survey> personalSurveys = new ArrayList<>();
@@ -47,7 +46,7 @@ public class SurveyManager {
     }
 
     public void createNewSurvey(String name, ObservableList<String> teams, ArrayList<String> options, boolean isMultipleChoice) {
-        User owner = Main.getCurrentUser();
+        Employee owner = Main.getCurrentUser();
         ArrayList<Employee> participantsArr = Main.getCorporation().findEmployee(teams);
         Survey newSurvey;
         if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, participantsArr, options, owner);
@@ -57,18 +56,16 @@ public class SurveyManager {
 
     public void loadSurvey(String id) {
         surveys.forEach(survey -> {
-            if (survey.getSurveyId().equals(id)) {
-                Main.currentSurvey = survey;
-            }
+            if (survey.getSurveyId().equals(id)) Main.currentSurvey = survey;
         });
     }
 
     public void voteInSurvey(String optionId) {
-        User user = Main.getCurrentUser();
+        Employee user = Main.getCurrentUser();
         Main.currentSurvey.vote(user, optionId);
     }
     public void voteInSurvey(ArrayList<String> ids) {
-        User user = Main.getCurrentUser();
+        Employee user = Main.getCurrentUser();
         ((MultipleChoiceSurvey)Main.currentSurvey).vote(user, ids);
     }
 }

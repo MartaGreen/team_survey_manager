@@ -15,6 +15,10 @@ public class Corporation {
         this.name = name;
         this.employees = employees;
         this.surveyManager = new SurveyManager();
+
+        for (Employee empl: employees) {
+            empl.setupSurveyManager(surveyManager);
+        }
     }
 
     public String getName() {

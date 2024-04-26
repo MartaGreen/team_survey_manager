@@ -1,14 +1,21 @@
 package employees;
 
+import survey.Survey;
+import survey.SurveyManager;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
 public abstract class Employee{
+    private String id;
     private String name;
     private String surname;
     private float experience;
     private String team;
-    private String id;
+    private ArrayList<Survey> surveys;
+    private ArrayList<Survey> personalSurveys;
+    private SurveyManager surveyManager;
 
     protected Employee(String name, String surname, float experience, String team) {
         this.name = name;
@@ -17,6 +24,14 @@ public abstract class Employee{
         this.team = team;
         this.id = UUID.randomUUID().toString();
     }
+
+    public void setupSurveyManager(SurveyManager surveyManager) {
+        this.surveyManager = surveyManager;
+
+        setupOpenedSurveys();
+        setupPersonalSurveys();
+    }
+
     public String getId() {
         return id;
     }
@@ -59,5 +74,23 @@ public abstract class Employee{
     }
     public boolean compareEmployee(String fullName) {
         return ((this.getName() + " " + this.getSurname()).equals(fullName));
+    }
+
+    public ArrayList<Survey> getPersonalSurveys() {
+        return personalSurveys;
+    }
+    public ArrayList<Survey> getOpenedSurveys() { return surveys; }
+
+    public void setupOpenedSurveys() {
+        this.surveys = surveyManager.getEmployeeSurveys(this);
+    }
+
+    public void setupPersonalSurveys() {
+        this.personalSurveys = surveyManager.getPersonalSurveys(this);
+    }
+
+    public void update() {
+        setupOpenedSurveys();
+        setupPersonalSurveys();
     }
 }

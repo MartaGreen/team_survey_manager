@@ -1,6 +1,5 @@
 package survey;
 
-import account.User;
 import employees.Employee;
 
 import java.util.ArrayList;
@@ -10,11 +9,11 @@ abstract public class Survey {
     private String surveyId;
     private String description;
     private String name;
-    private User owner;
+    private Employee owner;
     private ArrayList<Employee> participants;
     protected ArrayList<SurveyOption> options;
 
-    public Survey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, User owner) {
+    public Survey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, Employee owner) {
         this.name = name;
         this.owner = owner;
         this.surveyId = UUID.randomUUID().toString();
@@ -34,7 +33,7 @@ abstract public class Survey {
         return false;
     }
 
-    public boolean checkOwner(User checkedOwner) {
+    public boolean checkOwner(Employee checkedOwner) {
         return (owner.getName().equals(checkedOwner.getName()) && owner.getSurname().equals(checkedOwner.getSurname()));
     }
 
@@ -47,5 +46,5 @@ abstract public class Survey {
         return this.options;
     }
 
-    public void vote(User user, String optionId) {}
+    public void vote(Employee user, String optionId) {}
 }

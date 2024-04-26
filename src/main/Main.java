@@ -1,6 +1,5 @@
 package main;
 
-import account.User;
 import corporation.Corporation;
 import employees.*;
 import javafx.application.Application;
@@ -15,7 +14,7 @@ import static pages.Router.loadInitialPage;
 
 public class Main extends Application {
     private static Corporation corporation;
-    private static User currentUser;
+    private static Employee currentUser;
     private static SurveyManager surveyManager;
     public static Survey currentSurvey;
 
@@ -68,18 +67,18 @@ public class Main extends Application {
         surveyManager = corp.surveyManager;
     }
     public static void setCurrentUser(Employee employee) {
-        currentUser = new User(employee, surveyManager);
+        currentUser = employee;
     }
     public static void setCurrentUser(String fullName) {
         for (Employee employee: corporation.getEmployees()) {
             if (employee.compareEmployee(fullName)) {
-                currentUser = new User(employee,  surveyManager);
+                currentUser = employee;
                 return;
             }
         }
     }
 
-    public static User getCurrentUser() {
+    public static Employee getCurrentUser() {
         return currentUser;
     }
     public static Corporation getCorporation() {

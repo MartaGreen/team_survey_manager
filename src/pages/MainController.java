@@ -1,6 +1,5 @@
 package pages;
 
-import account.User;
 import employees.Employee;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +11,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
 import survey.Survey;
+import survey.SurveyManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class MainController implements Controller {
     @FXML
     private VBox openedSurveysBox;
 
-    private User user;
+    private Employee user;
 
     public void initialize() {
         setupPage();
@@ -38,7 +38,6 @@ public class MainController implements Controller {
 
     public void setupPage() {
         this.user = Main.getCurrentUser();
-//        user.update();
 
         fullName.setText(getUserFullName(user));
         teamLabel.setText(user.getTeam());

@@ -9,5 +9,4 @@ module main.Main {
     exports corporation;
     exports employees;
     exports survey;
-    exports account;
 }
