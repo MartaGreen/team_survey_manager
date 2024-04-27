@@ -23,7 +23,7 @@ public class NewSurveyController {
     @FXML
     private TextArea surveyDescriptionField;
     @FXML
-    private ListView<String> participantsBox;
+    private ListView<String> teamsBox;
     @FXML
     private VBox surveyOptionsField;
     @FXML
@@ -32,16 +32,16 @@ public class NewSurveyController {
     @FXML
     public void initialize() {
         ObservableList<String> items = FXCollections.observableArrayList(
-                "product", "manager", "design", "frontend", "backend"
+                "product", "manager", "design", "frontend", "backend", "tester"
         );
-        participantsBox.setItems(items);
-        participantsBox.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        teamsBox.setItems(items);
+        teamsBox.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
     }
 
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
         String name = surveyNameField.getText();
-        ObservableList<String> selectedTeams = participantsBox.getSelectionModel().getSelectedItems();
+        ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
         ArrayList<String> options = new ArrayList<>();
 
         for (Node option: surveyOptionsField.getChildren()) {

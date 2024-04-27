@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-public abstract class Employee{
+public abstract class Employee implements SurveyObserver{
     private String id;
     private String name;
     private String surname;
@@ -25,11 +25,19 @@ public abstract class Employee{
         this.id = UUID.randomUUID().toString();
     }
 
+    protected Employee(String name, String surname, float experience, String team, SurveyManager surveyManager) {
+        this.name = name;
+        this.surname = surname;
+        this.experience = experience;
+        this.team = team;
+        this.id = UUID.randomUUID().toString();
+        setupSurveyManager(surveyManager);
+    }
+
     public void setupSurveyManager(SurveyManager surveyManager) {
         this.surveyManager = surveyManager;
-
-        setupOpenedSurveys();
-        setupPersonalSurveys();
+        this.surveyManager.subscribe(this);
+        update();
     }
 
     public String getId() {

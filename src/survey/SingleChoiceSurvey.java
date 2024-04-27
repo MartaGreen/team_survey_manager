@@ -5,8 +5,8 @@ import employees.Employee;
 import java.util.ArrayList;
 
 public class SingleChoiceSurvey extends Survey {
-    SingleChoiceSurvey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, Employee owner) {
-        super(name, participants, optionss, owner);
+    SingleChoiceSurvey(String name, ArrayList<String> teams, ArrayList<String> options, Employee owner) {
+        super(name, teams, options, owner);
     }
 
     public void vote(Employee user, String optionId) {

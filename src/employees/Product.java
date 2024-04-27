@@ -7,5 +7,9 @@ public class Product extends Employee{
         super(name, surname, experience, team);
     }
 
+    public Product(String name, String surname, float experience, String team, SurveyManager surveyManager) {
+        super(name, surname, experience, team, surveyManager);
+    }
+
     //some specific Product's methods
 }

@@ -56,7 +56,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ListView fx:id="participantsBox" layoutX="281.0" layoutY="366.0" prefHeight="74.0" prefWidth="439.0" />
+      <ListView fx:id="teamsBox" layoutX="281.0" layoutY="366.0" prefHeight="74.0" prefWidth="439.0" />
       <CheckBox fx:id="multipleChoiceSetter" layoutX="606.0" layoutY="148.0" mnemonicParsing="false" text="multiple choice">
          <font>
             <Font size="14.0" />

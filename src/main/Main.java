@@ -35,7 +35,7 @@ public class Main extends Application {
         employees.add(new FrontendDeveloper("Jane", "Smith", 3.0f, "frontend"));
         employees.add(new Designer("Michael", "Johnson", 7.2f, "design"));
         employees.add(new Product("Emily", "Williams", 4.8f, "product"));
-        employees.add(new Manager("David", "Brown", 10.0f, "account"));
+        employees.add(new Tester("David", "Brown", 10.0f, "tester"));
         employees.add(new BackendDeveloper("Sarah", "Anderson", 2.3f, "backend"));
         employees.add(new FrontendDeveloper("Alex", "Martinez", 6.7f, "frontend"));
         employees.add(new Designer("Olivia", "Garcia", 8.9f, "design"));
@@ -45,7 +45,7 @@ public class Main extends Application {
         employees.add(new FrontendDeveloper("Ava", "Lee", 6.5f, "frontend"));
         employees.add(new Designer("Noah", "Harris", 7.8f, "design"));
         employees.add(new Product("Emma", "Clark", 3.6f, "product"));
-        employees.add(new Manager("James", "Lewis", 11.2f, "account"));
+        employees.add(new Tester("James", "Lewis", 11.2f, "tester"));
         employees.add(new BackendDeveloper("Mia", "Walker", 5.9f, "backend"));
         employees.add(new FrontendDeveloper("Liam", "Hall", 2.1f, "frontend"));
         employees.add(new Designer("Charlotte", "Allen", 9.3f, "design"));

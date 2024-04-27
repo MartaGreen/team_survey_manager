@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 public class MultipleChoiceSurvey extends Survey{
 
-    MultipleChoiceSurvey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, Employee owner) {
-        super(name, participants, optionss, owner);
+    MultipleChoiceSurvey(String name, ArrayList<String> teams, ArrayList<String> options, Employee owner) {
+        super(name, teams, options, owner);
     }
 
     public void vote(Employee user, ArrayList<String> optionsId) {

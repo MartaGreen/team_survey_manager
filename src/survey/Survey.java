@@ -8,27 +8,27 @@ import java.util.UUID;
 abstract public class Survey {
     private String surveyId;
     private String description;
-    private String name;
-    private Employee owner;
-    private ArrayList<Employee> participants;
+    private final String name;
+    private final Employee owner;
+    private final ArrayList<String> participantTeams;
     protected ArrayList<SurveyOption> options;
 
-    public Survey(String name, ArrayList<Employee> participants, ArrayList<String> optionss, Employee owner) {
+    public Survey(String name, ArrayList<String> participantTeams, ArrayList<String> options, Employee owner) {
         this.name = name;
         this.owner = owner;
         this.surveyId = UUID.randomUUID().toString();
-        this.participants = participants;
+        this.participantTeams = participantTeams;
 
         this.options = new ArrayList<>();
-        for (String opt: optionss) {
+        for (String opt: options) {
             this.options.add(new SurveyOption(opt, "single"));
         }
     }
 
     public boolean containEmployee(Employee employee) {
-        if (participants == null) return false;
-        for (Employee empl: participants) {
-            if (empl.getId().equals(employee.getId())) return true;
+        if (participantTeams == null) return false;
+        for (String team: participantTeams) {
+            if (team.equals(employee.getTeam())) return true;
         }
         return false;
     }

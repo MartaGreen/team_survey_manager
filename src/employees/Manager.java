@@ -7,5 +7,9 @@ public class Manager extends Employee{
         super(name, surname, experience, team);
     }
 
+    public Manager(String name, String surname, float experience, String team, SurveyManager surveyManager) {
+        super(name, surname, experience, team, surveyManager);
+    }
+
     //some specific Manager's methods
 }
