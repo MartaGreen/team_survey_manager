@@ -3,7 +3,6 @@ package survey;
 import employees.Employee;
 import employees.SurveyObserver;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import main.Main;
 
@@ -13,14 +12,6 @@ public class SurveyManager {
     private final ArrayList<Survey> surveysArr = new ArrayList<>();
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
     ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
-
-    public SurveyManager() {
-//        surveys.addListener((ListChangeListener<? super survey.Survey>) change -> {
-//            System.out.print("Surveys was changed\nUpdate user\nUpdate current survey\n");
-//            Main.getCurrentUser().update();
-//            loadSurvey(Main.currentSurvey.getSurveyId());
-//        });
-    }
 
     public void subscribe(SurveyObserver subscriber) {
         surveySubscribers.add(subscriber);
@@ -62,6 +53,11 @@ public class SurveyManager {
         surveys.add(newSurvey);
 
         inform(newSurvey);
+    }
+
+    public void deleteSurvey(Survey survey) {
+        surveys.remove(survey);
+        inform(survey);
     }
 
     public void loadSurvey(String id) {

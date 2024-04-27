@@ -60,7 +60,7 @@ public class MainController implements Controller {
         System.out.print("Personal surveys " + personalSurveys + "\n");
         personalSurveysBox.getChildren().clear();
         if (personalSurveys != null) {
-            personalSurveys.forEach(survey -> personalSurveysBox.getChildren().add(new Text(survey.getSurveyName())));
+            personalSurveys.forEach(this::createPersonalSurveyField);
         }
     }
 
@@ -91,6 +91,30 @@ public class MainController implements Controller {
         });
 
         openedSurveysBox.getChildren().add(surveyContainer);
+    }
+    private void createPersonalSurveyField(Survey survey) {
+        AnchorPane surveyContainer = new AnchorPane();
+        surveyContainer.prefWidth(700);
+        surveyContainer.setId(survey.getSurveyId());
+
+        Text surveyName = new Text(survey.getSurveyName());
+        surveyName.prefWidth(500);
+        surveyName.setText(survey.getSurveyName());
+        surveyName.setLayoutY(20);
+        surveyName.setFont(Font.font(16));
+
+        Button voteBtn = new Button("delete");
+        voteBtn.setLayoutX(650);
+        voteBtn.setLayoutY(10);
+
+        surveyContainer.getChildren().addAll(surveyName, voteBtn);
+
+        voteBtn.setOnAction(event -> {
+            Main.getSurveyManager().deleteSurvey(survey);
+            setupPage();
+        });
+
+        personalSurveysBox.getChildren().add(surveyContainer);
     }
 
     private String getUserFullName(Employee user) {
