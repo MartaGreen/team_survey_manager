@@ -9,7 +9,9 @@ public class SingleChoiceSurvey extends Survey {
         super(name, teams, options, owner);
     }
 
-    public void vote(Employee user, String optionId) {
+    public void vote(Employee user, ArrayList<String> optionsId) {
+        String optionId = optionsId.getFirst();
+
         int votesNumber = 0;
         for (SurveyOption option: options) {
             if (option.getOptionId().equals(optionId)) option.addVoter(user);

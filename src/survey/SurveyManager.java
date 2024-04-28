@@ -66,13 +66,10 @@ public class SurveyManager {
         });
     }
 
-    public void voteInSurvey(String optionId) {
-        Employee user = Main.getCurrentUser();
-        Main.currentSurvey.vote(user, optionId);
-    }
     public void voteInSurvey(ArrayList<String> ids) {
+        Survey survey = Main.currentSurvey;
         Employee user = Main.getCurrentUser();
-        ((MultipleChoiceSurvey)Main.currentSurvey).vote(user, ids);
+        survey.vote(user, ids);
     }
 
     private void inform(Survey survey) {

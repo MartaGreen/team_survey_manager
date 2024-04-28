@@ -90,10 +90,7 @@ public class SurveyController {
             }
         }
 
-        if (ids.isEmpty()) return;
-        else if (ids.size() == 1) Main.getSurveyManager().voteInSurvey(ids.getFirst());
-        else Main.getSurveyManager().voteInSurvey(ids);
-
+        Main.getSurveyManager().voteInSurvey(ids);
         setupOptions(Main.currentSurvey);
     }
 
