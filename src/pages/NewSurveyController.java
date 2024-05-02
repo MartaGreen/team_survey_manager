@@ -40,24 +40,34 @@ public class NewSurveyController {
 
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
-        String name = surveyNameField.getText();
-        ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
-        ArrayList<String> options = new ArrayList<>();
+        try {
+            String name = surveyNameField.getText();
+            if (name.isEmpty()) throw new EmptyFieldException("Name", surveyNameField);
+            else surveyNameField.setStyle("-fx-border-color: none");
+            ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
+            ArrayList<String> options = new ArrayList<>();
 
-        for (Node option: surveyOptionsField.getChildren()) {
-            AnchorPane box = (AnchorPane) option;
-            for (javafx.scene.Node node : box.getChildren()) {
-                if (node instanceof TextField) {
-                    System.out.print(option);
-                    options.add(((TextField) node).getText());
+            for (Node option: surveyOptionsField.getChildren()) {
+                AnchorPane box = (AnchorPane) option;
+                for (javafx.scene.Node node : box.getChildren()) {
+                    if (node instanceof TextField) {
+                        String optionName = ((TextField) node).getText();
+                        if (optionName.isEmpty()) throw new EmptyFieldException("Option", (TextField) node);
+                        else node.setStyle("-fx-border-color: none");
+                        options.add(optionName);
+                    }
                 }
             }
+
+            boolean isMultipleChoice = multipleChoiceSetter.isSelected();
+
+            Main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
+            switchToPage(event, "main.fxml");
+        } catch (EmptyFieldException err) {
+            System.out.println(err.getMessage());
+            TextField errField = err.getEmptyField();
+            errField.setStyle("-fx-border-color: red");
         }
-
-        boolean isMultipleChoice = multipleChoiceSetter.isSelected();
-
-        Main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
-        switchToPage(event, "main.fxml");
     }
 
     @FXML
