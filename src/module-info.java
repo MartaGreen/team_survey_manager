@@ -9,4 +9,6 @@ module main.Main {
     exports corporation;
     exports employees;
     exports survey;
+    exports pages.validation;
+    opens pages.validation to javafx.fxml;
 }

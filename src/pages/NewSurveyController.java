@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
+import pages.validation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,9 +29,17 @@ public class NewSurveyController {
     private VBox surveyOptionsField;
     @FXML
     private CheckBox multipleChoiceSetter;
+    @FXML
+    private Label errorMsg;
+
+    private Validator emptyFieldValidator;
+    private Validator shortFieldValidator;
 
     @FXML
     public void initialize() {
+        this.emptyFieldValidator = new Validator(new EmptyFieldHandler());
+        this.shortFieldValidator = new Validator(new ShortFieldHandler());
+
         ObservableList<String> items = FXCollections.observableArrayList(
                 "product", "manager", "design", "frontend", "backend", "tester"
         );
@@ -41,9 +50,13 @@ public class NewSurveyController {
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
         try {
+            errorMsg.setText("");
+
+            surveyNameField.setStyle("-fx-border-color: none");
+            emptyFieldValidator.validate(surveyNameField, "name");
+            shortFieldValidator.validate(surveyNameField, "name");
             String name = surveyNameField.getText();
-            if (name.isEmpty()) throw new EmptyFieldException("Name", surveyNameField);
-            else surveyNameField.setStyle("-fx-border-color: none");
+
             ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
             ArrayList<String> options = new ArrayList<>();
 
@@ -63,10 +76,11 @@ public class NewSurveyController {
 
             Main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
             switchToPage(event, "main.fxml");
-        } catch (EmptyFieldException err) {
+        } catch (CustomFieldException err) {
             System.out.println(err.getMessage());
-            TextField errField = err.getEmptyField();
+            TextField errField = err.getErrField();
             errField.setStyle("-fx-border-color: red");
+            errorMsg.setText(err.getMessage());
         }
     }
 

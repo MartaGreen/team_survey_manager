@@ -11,14 +11,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
 import survey.Survey;
-import survey.SurveyManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static pages.Router.switchToPage;
 
-public class MainController implements Controller {
+public class MainController {
     @FXML
     private Text fullName;
     @FXML
