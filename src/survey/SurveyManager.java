@@ -74,7 +74,7 @@ public class SurveyManager {
 
     private void inform(Survey survey) {
         for (SurveyObserver subscriber: surveySubscribers) {
-            if (survey.containEmployee((Employee) subscriber)) {
+            if (survey.containEmployee((Employee) subscriber) || survey.checkOwner((Employee) subscriber)) {
                 ((Employee) subscriber).update();
             };
         }
