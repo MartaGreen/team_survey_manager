@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
+import survey.GraphController;
 import survey.Survey;
 
 import java.io.IOException;
@@ -102,11 +103,19 @@ public class MainController {
         surveyName.setLayoutY(20);
         surveyName.setFont(Font.font(16));
 
+        Button resultBtn = new Button("show result");
+        resultBtn.setLayoutX(550);
+        resultBtn.setLayoutY(10);
+
         Button voteBtn = new Button("delete");
         voteBtn.setLayoutX(650);
         voteBtn.setLayoutY(10);
 
-        surveyContainer.getChildren().addAll(surveyName, voteBtn);
+        surveyContainer.getChildren().addAll(surveyName, resultBtn, voteBtn);
+
+        resultBtn.setOnAction(event -> {
+            new GraphController(survey);
+        });
 
         voteBtn.setOnAction(event -> {
             Main.getSurveyManager().deleteSurvey(survey);

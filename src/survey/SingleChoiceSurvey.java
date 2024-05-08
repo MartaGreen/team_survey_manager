@@ -23,4 +23,6 @@ public class SingleChoiceSurvey extends Survey {
             option.recalculate(votesNumber);
         }
     }
+
+
 }
