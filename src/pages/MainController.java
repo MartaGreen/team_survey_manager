@@ -10,7 +10,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import main.Main;
-import survey.GraphController;
 import survey.Survey;
 
 import java.io.IOException;

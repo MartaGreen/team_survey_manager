@@ -32,7 +32,6 @@ public class EmptyValidation<T> implements ErrorHandler<T> {
         else if (field instanceof CVBox vBox) {
             vBox.unhightlight();
             boolean isFieldEmpty = vBox.getChildren().isEmpty();
-            System.out.println("IS TEAMS FIELD EMPTY?????????? " + isFieldEmpty);
             if (isFieldEmpty) throw new EmptyException(vBox.getName(), vBox);
         }
     }

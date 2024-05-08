@@ -31,6 +31,7 @@ public class Main extends Application {
     private static void generateDefaultCorp() {
         ArrayList<Employee> employees = new ArrayList<>();
 
+        // create some basic users
         employees.add(new BackendDeveloper("John", "Doe", 5.5f, "backend"));
         employees.add(new FrontendDeveloper("Jane", "Smith", 3.0f, "frontend"));
         employees.add(new Designer("Michael", "Johnson", 7.2f, "design"));

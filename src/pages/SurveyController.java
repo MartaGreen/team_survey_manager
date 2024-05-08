@@ -40,6 +40,7 @@ public class SurveyController {
         setupOptions(openedSurvey);
     }
 
+    // setup options data on the page
     private void setupOptions(Survey openedSurvey) {
         ArrayList<SurveyOption> surveyOptions = openedSurvey.getSurveyOption();
         surveyOptionsBox.getChildren().clear();
@@ -91,6 +92,7 @@ public class SurveyController {
         }
 
         Main.getSurveyManager().voteInSurvey(ids);
+        // update options data on the page
         setupOptions(Main.currentSurvey);
     }
 

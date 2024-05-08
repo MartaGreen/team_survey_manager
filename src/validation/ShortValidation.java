@@ -5,7 +5,7 @@ import validation.components.CTextField;
 import java.util.ArrayList;
 
 public class ShortValidation<T> implements ErrorHandler<T>{
-    private ArrayList<T> validationFields;
+    private final ArrayList<T> validationFields;
 
     public ShortValidation() {
         this.validationFields = new ArrayList<>();

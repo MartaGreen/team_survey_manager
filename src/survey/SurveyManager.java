@@ -13,34 +13,36 @@ public class SurveyManager {
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
     ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
 
+    // subscribe a user for surveys update;
     public void subscribe(SurveyObserver subscriber) {
         surveySubscribers.add(subscriber);
     }
+    // unsubscribe a user for surveys update;
+    // this method is not used now due to non-existence of user deletion.
     public void unsubscribe(SurveyObserver subscriber) {
         surveySubscribers.remove(subscriber);
     }
 
+    // send to a user his surveys (surveys where he can vote)
     public ArrayList<Survey> getEmployeeSurveys(Employee user) {
         if (surveys == null) return null;
 
         ArrayList<Survey> employeeSurveys = new ArrayList<>();
-
-        for (Survey survey: surveys) {
+        surveys.forEach(survey -> {
             if (survey.containEmployee(user)) employeeSurveys.add(survey);
-        }
+        });
 
         return employeeSurveys;
     }
 
+    // send to a user his personal surveys (surveys where he is owner)
     public ArrayList<Survey> getPersonalSurveys(Employee user) {
         if (surveys == null) return null;
 
         ArrayList<Survey> personalSurveys = new ArrayList<>();
-        for (Survey survey: surveys) {
-            if (survey.checkOwner(user)) {
-                personalSurveys.add(survey);
-            }
-        }
+        surveys.forEach(survey -> {
+            if (survey.checkOwner(user)) personalSurveys.add(survey);
+        });
 
         return personalSurveys;
     }
@@ -72,6 +74,7 @@ public class SurveyManager {
         survey.vote(user, ids);
     }
 
+    // inform each subscribes user about changes in surveys
     private void inform(Survey survey) {
         for (SurveyObserver subscriber: surveySubscribers) {
             if (survey.containEmployee((Employee) subscriber) || survey.checkOwner((Employee) subscriber)) {

@@ -1,4 +1,4 @@
-package survey;
+package pages;
 
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -6,6 +6,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
+import survey.Survey;
+import survey.SurveyOption;
 
 import java.util.ArrayList;
 
