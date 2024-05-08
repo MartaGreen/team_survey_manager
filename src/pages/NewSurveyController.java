@@ -8,10 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import main.Main;
-import pages.validation.*;
+import validation.*;
+import validation.components.CListView;
+import validation.components.CTextField;
+import validation.components.CVBox;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,13 +22,13 @@ import static pages.Router.switchToPage;
 
 public class NewSurveyController {
     @FXML
-    private TextField surveyNameField;
+    private CTextField surveyNameField;
     @FXML
     private TextArea surveyDescriptionField;
     @FXML
-    private ListView<String> teamsBox;
+    private CListView teamsBox;
     @FXML
-    private VBox surveyOptionsField;
+    private CVBox surveyOptionsField;
     @FXML
     private CheckBox multipleChoiceSetter;
     @FXML
@@ -37,24 +39,32 @@ public class NewSurveyController {
 
     @FXML
     public void initialize() {
-        this.emptyFieldValidator = new Validator(new EmptyFieldHandler());
-        this.shortFieldValidator = new Validator(new ShortFieldHandler());
+        this.emptyFieldValidator = new Validator(new EmptyValidation());
+        this.shortFieldValidator = new Validator(new ShortValidation());
 
         ObservableList<String> items = FXCollections.observableArrayList(
                 "product", "manager", "design", "frontend", "backend", "tester"
         );
         teamsBox.setItems(items);
         teamsBox.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        teamsBox.setName("Teams field");
+        emptyFieldValidator.add(teamsBox);
+
+        surveyNameField.setName("Survey field name");
+        emptyFieldValidator.add(surveyNameField);
+        shortFieldValidator.add(surveyNameField);
+
+        surveyOptionsField.setName("Options box");
+        emptyFieldValidator.add(surveyOptionsField);
     }
 
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
         try {
             errorMsg.setText("");
+            emptyFieldValidator.validate();
+            shortFieldValidator.validate();
 
-            surveyNameField.setStyle("-fx-border-color: none");
-            emptyFieldValidator.validate(surveyNameField, "name");
-            shortFieldValidator.validate(surveyNameField, "name");
             String name = surveyNameField.getText();
 
             ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
@@ -65,8 +75,6 @@ public class NewSurveyController {
                 for (javafx.scene.Node node : box.getChildren()) {
                     if (node instanceof TextField) {
                         String optionName = ((TextField) node).getText();
-                        if (optionName.isEmpty()) throw new EmptyFieldException("Option", (TextField) node);
-                        else node.setStyle("-fx-border-color: none");
                         options.add(optionName);
                     }
                 }
@@ -78,8 +86,6 @@ public class NewSurveyController {
             switchToPage(event, "main.fxml");
         } catch (CustomFieldException err) {
             System.out.println(err.getMessage());
-            TextField errField = err.getErrField();
-            errField.setStyle("-fx-border-color: red");
             errorMsg.setText(err.getMessage());
         }
     }
@@ -94,18 +100,21 @@ public class NewSurveyController {
         AnchorPane box = new AnchorPane();
         box.prefWidth(600);
 
-        TextField optionName =  new TextField();
+        CTextField optionName =  new CTextField();
         optionName.setPromptText("option");
         optionName.setLayoutY(5);
         optionName.setLayoutX(5);
         optionName.setPrefWidth(500);
         optionName.setFont(Font.font(14));
         optionName.getStyleClass().add("optionName");
+        surveyNameField.setName("Option field");
+        emptyFieldValidator.add(optionName);
+        shortFieldValidator.add(optionName);
 
         Button removeBtn = new Button();
         removeBtn.setText("remove");
         removeBtn.setFont(Font.font(14));
-        removeBtn.setOnAction(this::deleteOption);
+        removeBtn.setOnAction(btnEvent -> deleteOption(optionName, btnEvent));
         removeBtn.setLayoutY(5);
         removeBtn.setLayoutX(550);
 
@@ -114,9 +123,11 @@ public class NewSurveyController {
         surveyOptionsField.getChildren().add(box);
     }
 
-    public void deleteOption(ActionEvent event) {
+    public void deleteOption(CTextField field, ActionEvent event) {
         Parent employeeToDelete = ((Node)event.getSource()).getParent();
         System.out.print(employeeToDelete);
         surveyOptionsField.getChildren().remove(employeeToDelete);
+        emptyFieldValidator.delete(field);
+        shortFieldValidator.delete(field);
     }
 }
