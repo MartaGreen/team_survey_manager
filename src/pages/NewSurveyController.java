@@ -14,6 +14,7 @@ import validation.*;
 import validation.components.CListView;
 import validation.components.CTextField;
 import validation.components.CVBox;
+import validation.components.ValidationComponent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,13 +35,13 @@ public class NewSurveyController {
     @FXML
     private Label errorMsg;
 
-    private Validator emptyFieldValidator;
-    private Validator shortFieldValidator;
+    private Validator<ValidationComponent> emptyFieldValidator;
+    private Validator<ValidationComponent>  shortFieldValidator;
 
     @FXML
     public void initialize() {
-        this.emptyFieldValidator = new Validator(new EmptyValidation());
-        this.shortFieldValidator = new Validator(new ShortValidation());
+        this.emptyFieldValidator = new Validator<ValidationComponent>(new EmptyValidation<ValidationComponent>());
+        this.shortFieldValidator = new Validator<ValidationComponent>(new ShortValidation<ValidationComponent>());
 
         ObservableList<String> items = FXCollections.observableArrayList(
                 "product", "manager", "design", "frontend", "backend", "tester"
