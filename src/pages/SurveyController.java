@@ -20,18 +20,19 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import static pages.Router.switchToPage;
-
-public class SurveyController {
+public class SurveyController implements Controller {
     @FXML
     private Text surveyName;
     @FXML
     private VBox surveyOptionsBox;
     private ToggleGroup optionsGroup;
+    private Main main;
 
-    @FXML
-    public void initialize() {
-        Survey openedSurvey = Main.currentSurvey;
+    public void setMain(Main main) {
+        this.main = main;
+        System.out.print("SURVEY CONTROLLER SURVEY CONTROLLER " + main + "\n");
+
+        Survey openedSurvey = main.currentSurvey;
         surveyName.setText(openedSurvey.getSurveyName());
 
         surveyOptionsBox.setSpacing(20);
@@ -59,7 +60,7 @@ public class SurveyController {
                 CheckBox checkbox = new CheckBox(opt.getName());
                 checkbox.setId(opt.getOptionId());
                 checkbox.setFont(Font.font(18));
-                checkbox.setSelected(opt.containsVoter(Main.getCurrentUser()));
+                checkbox.setSelected(opt.containsVoter(main.getCurrentUser()));
                 checkbox.setLayoutY(10);
                 box.getChildren().addAll(checkbox, percent);
             }
@@ -68,7 +69,7 @@ public class SurveyController {
                 rbtn.setId(opt.getOptionId());
                 rbtn.setToggleGroup(optionsGroup);
                 rbtn.setFont(Font.font(18));
-                rbtn.setSelected(opt.containsVoter(Main.getCurrentUser()));
+                rbtn.setSelected(opt.containsVoter(main.getCurrentUser()));
                 rbtn.setLayoutY(10);
                 box.getChildren().addAll(rbtn, percent);
             }
@@ -91,13 +92,13 @@ public class SurveyController {
             }
         }
 
-        Main.getSurveyManager().voteInSurvey(ids);
+        main.getSurveyManager().voteInSurvey(ids);
         // update options data on the page
-        setupOptions(Main.currentSurvey);
+        setupOptions(main.currentSurvey);
     }
 
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-        switchToPage(event, "main.fxml");
+        main.router.switchToPage(event, "main.fxml");
     }
 }

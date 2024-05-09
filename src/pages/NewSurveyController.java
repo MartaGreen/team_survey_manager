@@ -19,9 +19,7 @@ import validation.components.ValidationComponent;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static pages.Router.switchToPage;
-
-public class NewSurveyController {
+public class NewSurveyController implements Controller {
     @FXML
     private CTextField surveyNameField;
     @FXML
@@ -34,9 +32,14 @@ public class NewSurveyController {
     private CheckBox multipleChoiceSetter;
     @FXML
     private Label errorMsg;
+    private Main main;
 
     private Validator<ValidationComponent> emptyFieldValidator;
     private Validator<ValidationComponent>  shortFieldValidator;
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
 
     @FXML
     public void initialize() {
@@ -83,8 +86,8 @@ public class NewSurveyController {
 
             boolean isMultipleChoice = multipleChoiceSetter.isSelected();
 
-            Main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
-            switchToPage(event, "main.fxml");
+            main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
+            main.router.switchToPage(event, "main.fxml");
         } catch (CustomFieldException err) {
             System.out.println(err.getMessage());
             errorMsg.setText(err.getMessage());
@@ -93,7 +96,7 @@ public class NewSurveyController {
 
     @FXML
     private void goBack(ActionEvent event) throws IOException {
-        switchToPage(event, "main.fxml");
+        main.router.switchToPage(event, "main.fxml");
     }
 
     @FXML

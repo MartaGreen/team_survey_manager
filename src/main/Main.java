@@ -4,31 +4,32 @@ import corporation.Corporation;
 import employees.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pages.Router;
 import survey.Survey;
 import survey.SurveyManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static pages.Router.loadInitialPage;
-
 public class Main extends Application {
-    private static Corporation corporation;
-    private static Employee currentUser;
-    private static SurveyManager surveyManager;
-    public static Survey currentSurvey;
+    private Corporation corporation;
+    private Employee currentUser;
+    private SurveyManager surveyManager;
+    public Survey currentSurvey;
+    public Router router;
 
     public static void main(String[] args) {
-        generateDefaultCorp();
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        loadInitialPage(stage);
+        generateDefaultCorp();
+        this.router = new Router(this);
+        this.router.loadInitialPage(stage);
     }
 
-    private static void generateDefaultCorp() {
+    private void generateDefaultCorp() {
         ArrayList<Employee> employees = new ArrayList<>();
 
         // create some basic users
@@ -58,19 +59,19 @@ public class Main extends Application {
         employees.add(new Product("Mia", "Carter", 2.9f, "product"));
         employees.add(new Manager("Evelyn", "Adams", 10.5f, "manager"));
 
-        Corporation corp = new Corporation("apple", employees);
+        Corporation corp = new Corporation("apple", employees, this);
         setCorporation(corp);
         setCurrentUser(employees.getFirst());
     }
 
-    public static void setCorporation(Corporation corp) {
+    public void setCorporation(Corporation corp) {
         corporation = corp;
         surveyManager = corp.surveyManager;
     }
-    public static void setCurrentUser(Employee employee) {
+    public void setCurrentUser(Employee employee) {
         currentUser = employee;
     }
-    public static void setCurrentUser(String fullName) {
+    public void setCurrentUser(String fullName) {
         for (Employee employee: corporation.getEmployees()) {
             if (employee.compareEmployee(fullName)) {
                 currentUser = employee;
@@ -79,13 +80,13 @@ public class Main extends Application {
         }
     }
 
-    public static Employee getCurrentUser() {
+    public Employee getCurrentUser() {
         return currentUser;
     }
-    public static Corporation getCorporation() {
+    public Corporation getCorporation() {
         return corporation;
     }
-    public static SurveyManager getSurveyManager() {
+    public SurveyManager getSurveyManager() {
         return surveyManager;
     }
 }

@@ -9,6 +9,10 @@ import main.Main;
 import java.util.ArrayList;
 
 public class SurveyManager {
+    private Main main;
+    public SurveyManager(Main main) {
+        this.main = main;
+    }
     private final ArrayList<Survey> surveysArr = new ArrayList<>();
     ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
     ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
@@ -48,7 +52,7 @@ public class SurveyManager {
     }
 
     public void createNewSurvey(String name, ArrayList<String> teams, ArrayList<String> options, boolean isMultipleChoice) {
-        Employee owner = Main.getCurrentUser();
+        Employee owner = main.getCurrentUser();
         Survey newSurvey;
         if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, teams, options, owner);
         else newSurvey = new SingleChoiceSurvey(name, teams, options, owner);
@@ -64,13 +68,13 @@ public class SurveyManager {
 
     public void loadSurvey(String id) {
         surveys.forEach(survey -> {
-            if (survey.getSurveyId().equals(id)) Main.currentSurvey = survey;
+            if (survey.getSurveyId().equals(id)) main.currentSurvey = survey;
         });
     }
 
     public void voteInSurvey(ArrayList<String> ids) {
-        Survey survey = Main.currentSurvey;
-        Employee user = Main.getCurrentUser();
+        Survey survey = main.currentSurvey;
+        Employee user = main.getCurrentUser();
         survey.vote(user, ids);
     }
 

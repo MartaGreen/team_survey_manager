@@ -15,9 +15,7 @@ import survey.Survey;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static pages.Router.switchToPage;
-
-public class MainController {
+public class MainController implements Controller {
     @FXML
     private Text fullName;
     @FXML
@@ -30,17 +28,21 @@ public class MainController {
     private VBox openedSurveysBox;
 
     private Employee user;
+    private Main main;
 
-    public void initialize() {
+    public void initialize() {}
+
+    public void setMain(Main main) {
+        this.main = main;
         setupPage();
     }
 
     public void setupPage() {
-        this.user = Main.getCurrentUser();
+        this.user = this.main.getCurrentUser();
 
         fullName.setText(getUserFullName(user));
         teamLabel.setText(user.getTeam());
-        ArrayList<Employee> employees = Main.getCorporation().getEmployees();
+        ArrayList<Employee> employees = this.main.getCorporation().getEmployees();
         for (Employee employee: employees) {
             switchBetweenUsersBar.getItems().add(getUserFullName(employee));
         }
@@ -82,8 +84,8 @@ public class MainController {
 
         voteBtn.setOnAction(event -> {
             try {
-                Main.getSurveyManager().loadSurvey(survey.getSurveyId());
-                switchToPage(event, "survey.fxml");
+                this.main.getSurveyManager().loadSurvey(survey.getSurveyId());
+                this.main.router.switchToPage(event, "survey.fxml");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -117,7 +119,7 @@ public class MainController {
         });
 
         voteBtn.setOnAction(event -> {
-            Main.getSurveyManager().deleteSurvey(survey);
+            this.main.getSurveyManager().deleteSurvey(survey);
             setupPage();
         });
 
@@ -134,7 +136,7 @@ public class MainController {
             System.out.println(selectedUser);
             switchBetweenUsersBar.setValue(selectedUser);
 
-            Main.setCurrentUser(selectedUser);
+            this.main.setCurrentUser(selectedUser);
 
             setupPage();
         });
@@ -142,6 +144,6 @@ public class MainController {
 
     @FXML
     private void createNewSurvey(ActionEvent event) throws IOException {
-        switchToPage(event, "newSurvey.fxml");
+        main.router.switchToPage(event, "newSurvey.fxml");
     }
 }
