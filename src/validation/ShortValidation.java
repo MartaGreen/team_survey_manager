@@ -40,10 +40,6 @@ public class ShortValidation<T> implements ErrorHandler<T>{
             String fieldText = textField.getText();
             if (fieldText.length() < 4) throw new ShortException(textField.getName(), textField);
         }
-//        else if (field instanceof TextArea) {
-//            String fieldText = ((TextArea) field).getText();
-//            if (fieldText.length() < 25) throw new ShortFieldException(fieldText, field);
-//        }
     }
 
     /**

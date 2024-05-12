@@ -15,7 +15,7 @@ abstract public class Survey {
     private String surveyId;
 
     /**
-     * The description of the survey.
+     * The optional description of the survey.
      */
     private String description;
 
@@ -43,15 +43,17 @@ abstract public class Survey {
      * Constructor for a survey with the specified parameters.
      *
      * @param name             The name of the survey.
+     * @param description      The description of survey
      * @param participantTeams The names of the teams eligible to participate in the survey.
      * @param options          The options available in the survey.
      * @param owner            The owner of the survey.
      */
-    public Survey(String name, ArrayList<String> participantTeams, ArrayList<String> options, Employee owner) {
+    public Survey(String name, String description, ArrayList<String> participantTeams, ArrayList<String> options, Employee owner) {
         this.name = name;
         this.owner = owner;
         this.surveyId = UUID.randomUUID().toString();
         this.participantTeams = participantTeams;
+        this.description = description;
 
         this.options = new ArrayList<>();
         for (String opt : options) {
@@ -108,6 +110,19 @@ abstract public class Survey {
      */
     public ArrayList<SurveyOption> getSurveyOption() {
         return this.options;
+    }
+
+    /**
+     * Retrieves the description of the survey.
+     *
+     * @return The description of the survey.
+     */
+    public String getSurveyDescription() {
+        return this.description;
+    }
+    /** Sets up survey description. */
+    public void setSurveyDescription(String newDescription) {
+        this.description = newDescription;
     }
 
     /**

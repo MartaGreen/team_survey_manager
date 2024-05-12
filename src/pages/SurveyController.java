@@ -27,6 +27,9 @@ public class SurveyController implements Controller {
     /** The text field for the survey name. */
     @FXML
     private Text surveyName;
+    /** The text field for the survey description. */
+    @FXML
+    private Text descriptionField;
 
     /** The container for survey options. */
     @FXML
@@ -56,6 +59,7 @@ public class SurveyController implements Controller {
 
         Survey openedSurvey = main.currentSurvey;
         surveyName.setText(openedSurvey.getSurveyName());
+        descriptionField.setText(openedSurvey.getSurveyDescription());
 
         surveyOptionsBox.setSpacing(20);
         optionsGroup = new ToggleGroup();

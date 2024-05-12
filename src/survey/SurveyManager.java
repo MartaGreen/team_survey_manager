@@ -86,15 +86,16 @@ public class SurveyManager {
      * Creates a new survey with the specified parameters.
      *
      * @param name             The name of the survey.
+     * @param description      The description of survey
      * @param teams            The teams' names eligible to participate in the survey.
      * @param options          The options available in the survey.
      * @param isMultipleChoice Indicates if the survey is multiple choice or single choice.
      */
-    public void createNewSurvey(String name, ArrayList<String> teams, ArrayList<String> options, boolean isMultipleChoice) {
+    public void createNewSurvey(String name, String description, ArrayList<String> teams, ArrayList<String> options, boolean isMultipleChoice) {
         Employee owner = main.getCurrentUser();
         Survey newSurvey;
-        if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, teams, options, owner);
-        else newSurvey = new SingleChoiceSurvey(name, teams, options, owner);
+        if (isMultipleChoice) newSurvey = new MultipleChoiceSurvey(name, description, teams, options, owner);
+        else newSurvey = new SingleChoiceSurvey(name, description, teams, options, owner);
         surveys.add(newSurvey);
 
         inform(newSurvey);

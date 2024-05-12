@@ -103,6 +103,7 @@ public class NewSurveyController implements Controller {
             shortFieldValidator.validate();
 
             String name = surveyNameField.getText();
+            String description = surveyDescriptionField.getText();
 
             ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
             ArrayList<String> options = new ArrayList<>();
@@ -119,7 +120,7 @@ public class NewSurveyController implements Controller {
 
             boolean isMultipleChoice = multipleChoiceSetter.isSelected();
 
-            main.getSurveyManager().createNewSurvey(name, selectedTeams, options, isMultipleChoice);
+            main.getSurveyManager().createNewSurvey(name, description, selectedTeams, options, isMultipleChoice);
             main.router.switchToPage(event, "main.fxml");
         } catch (CustomFieldException err) {
             System.out.println(err.getMessage());
