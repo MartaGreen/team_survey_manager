@@ -20,16 +20,33 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Controller survey interactions page.
+ */
 public class SurveyController implements Controller {
     @FXML
     private Text surveyName;
+
     @FXML
     private VBox surveyOptionsBox;
+
     private ToggleGroup optionsGroup;
     private Main main;
 
+    /**
+     * Sets the main to get data about current state of app.
+     *
+     * @param main The main instance.
+     */
     public void setMain(Main main) {
         this.main = main;
+        setupPage();
+    }
+
+    /**
+     * Sets up the survey page.
+     */
+    public void setupPage() {
         System.out.print("SURVEY CONTROLLER SURVEY CONTROLLER " + main + "\n");
 
         Survey openedSurvey = main.currentSurvey;
@@ -41,12 +58,15 @@ public class SurveyController implements Controller {
         setupOptions(openedSurvey);
     }
 
-    // setup options data on the page
+    /**
+     * Collect options data for survey's voting
+     * @param openedSurvey current survey
+     */
     private void setupOptions(Survey openedSurvey) {
         ArrayList<SurveyOption> surveyOptions = openedSurvey.getSurveyOption();
         surveyOptionsBox.getChildren().clear();
 
-        for (SurveyOption opt: surveyOptions) {
+        for (SurveyOption opt : surveyOptions) {
             AnchorPane box = new AnchorPane();
             box.prefWidth(500);
             box.prefHeight(50);
@@ -63,8 +83,7 @@ public class SurveyController implements Controller {
                 checkbox.setSelected(opt.containsVoter(main.getCurrentUser()));
                 checkbox.setLayoutY(10);
                 box.getChildren().addAll(checkbox, percent);
-            }
-            else {
+            } else {
                 RadioButton rbtn = new RadioButton(opt.getName());
                 rbtn.setId(opt.getOptionId());
                 rbtn.setToggleGroup(optionsGroup);
@@ -78,13 +97,16 @@ public class SurveyController implements Controller {
         }
     }
 
+    /**
+     * Handles voting in the survey.
+     */
     @FXML
     private void vote() {
-        ArrayList<String>ids = new ArrayList<>();
+        ArrayList<String> ids = new ArrayList<>();
 
-        for (Node node: surveyOptionsBox.getChildren()) {
+        for (Node node : surveyOptionsBox.getChildren()) {
             AnchorPane box = (AnchorPane) node;
-            for (Node elem: box.getChildren()) {
+            for (Node elem : box.getChildren()) {
                 if (elem instanceof RadioButton && ((RadioButton) elem).isSelected())
                     ids.add(elem.getId());
                 if (elem instanceof CheckBox && ((CheckBox) elem).isSelected())
@@ -97,6 +119,12 @@ public class SurveyController implements Controller {
         setupOptions(main.currentSurvey);
     }
 
+    /**
+     * Navigates back to the main page.
+     *
+     * @param event The action event triggered by clicking the "Go Back" button.
+     * @throws IOException If an I/O exception occurs while switching to the main page.
+     */
     @FXML
     private void goBack(ActionEvent event) throws IOException {
         main.router.switchToPage(event, "main.fxml");

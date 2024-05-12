@@ -1,7 +1,7 @@
 package validation;
 
 public class Validator<T> {
-    ErrorHandler<T> validator;
+    private final ErrorHandler<T> validator;
     public Validator(ErrorHandler<T> handler) {
         this.validator = handler;
     }

@@ -9,14 +9,13 @@ import main.Main;
 import java.util.ArrayList;
 
 public class SurveyManager {
-    private Main main;
+    private final ArrayList<Survey> surveysArr = new ArrayList<>();
+    private ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
+    private ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
+    private final Main main;
     public SurveyManager(Main main) {
         this.main = main;
     }
-    private final ArrayList<Survey> surveysArr = new ArrayList<>();
-    ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
-    ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
-
     // subscribe a user for surveys update;
     public void subscribe(SurveyObserver subscriber) {
         surveySubscribers.add(subscriber);
@@ -29,8 +28,6 @@ public class SurveyManager {
 
     // send to a user his surveys (surveys where he can vote)
     public ArrayList<Survey> getEmployeeSurveys(Employee user) {
-        if (surveys == null) return null;
-
         ArrayList<Survey> employeeSurveys = new ArrayList<>();
         surveys.forEach(survey -> {
             if (survey.containEmployee(user)) employeeSurveys.add(survey);
@@ -41,8 +38,6 @@ public class SurveyManager {
 
     // send to a user his personal surveys (surveys where he is owner)
     public ArrayList<Survey> getPersonalSurveys(Employee user) {
-        if (surveys == null) return null;
-
         ArrayList<Survey> personalSurveys = new ArrayList<>();
         surveys.forEach(survey -> {
             if (survey.checkOwner(user)) personalSurveys.add(survey);

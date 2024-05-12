@@ -19,38 +19,55 @@ import validation.components.ValidationComponent;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Controller for a new survey page.
+ */
 public class NewSurveyController implements Controller {
     @FXML
     private CTextField surveyNameField;
+
     @FXML
     private TextArea surveyDescriptionField;
+
     @FXML
     private CListView teamsBox;
+
     @FXML
     private CVBox surveyOptionsField;
+
     @FXML
     private CheckBox multipleChoiceSetter;
+
     @FXML
     private Label errorMsg;
+
     private Main main;
 
     private Validator<ValidationComponent> emptyFieldValidator;
-    private Validator<ValidationComponent>  shortFieldValidator;
+    private Validator<ValidationComponent> shortFieldValidator;
 
+    /**
+     * Sets the main to get data about current state of app.
+     *
+     * @param main The main instance.
+     */
     public void setMain(Main main) {
         this.main = main;
+        setupPage();
     }
 
-    @FXML
-    public void initialize() {
-        this.emptyFieldValidator = new Validator<ValidationComponent>(new EmptyValidation<ValidationComponent>());
-        this.shortFieldValidator = new Validator<ValidationComponent>(new ShortValidation<ValidationComponent>());
+    /**
+     * Sets up new survey page.
+     */
+    public void setupPage() {
+        this.emptyFieldValidator = new Validator<>(new EmptyValidation<>());
+        this.shortFieldValidator = new Validator<>(new ShortValidation<>());
 
         ObservableList<String> items = FXCollections.observableArrayList(
                 "product", "manager", "design", "frontend", "backend", "tester"
         );
         teamsBox.setItems(items);
-        teamsBox.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        teamsBox.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         teamsBox.setName("Teams field");
         emptyFieldValidator.add(teamsBox);
 
@@ -62,6 +79,12 @@ public class NewSurveyController implements Controller {
         emptyFieldValidator.add(surveyOptionsField);
     }
 
+    /**
+     * Creates a new survey.
+     *
+     * @param event The action event triggered by clicking the "Create Survey" button.
+     * @throws IOException If an I/O exception occurs while switching to the main page.
+     */
     @FXML
     private void createSurvey(ActionEvent event) throws IOException {
         try {
@@ -74,9 +97,9 @@ public class NewSurveyController implements Controller {
             ArrayList<String> selectedTeams = new ArrayList<>(teamsBox.getSelectionModel().getSelectedItems());
             ArrayList<String> options = new ArrayList<>();
 
-            for (Node option: surveyOptionsField.getChildren()) {
+            for (Node option : surveyOptionsField.getChildren()) {
                 AnchorPane box = (AnchorPane) option;
-                for (javafx.scene.Node node : box.getChildren()) {
+                for (Node node : box.getChildren()) {
                     if (node instanceof TextField) {
                         String optionName = ((TextField) node).getText();
                         options.add(optionName);
@@ -94,17 +117,26 @@ public class NewSurveyController implements Controller {
         }
     }
 
+    /**
+     * Navigates back to the main page.
+     *
+     * @param event The action event triggered by clicking the "Go Back" button.
+     * @throws IOException If an I/O exception occurs while switching to the main page.
+     */
     @FXML
     private void goBack(ActionEvent event) throws IOException {
         main.router.switchToPage(event, "main.fxml");
     }
 
+    /**
+     * Adds an option in the survey creation field.
+     */
     @FXML
-    private void addOption(ActionEvent event) {
+    private void addOption() {
         AnchorPane box = new AnchorPane();
         box.prefWidth(600);
 
-        CTextField optionName =  new CTextField();
+        CTextField optionName = new CTextField();
         optionName.setPromptText("option");
         optionName.setLayoutY(5);
         optionName.setLayoutX(5);
@@ -127,8 +159,14 @@ public class NewSurveyController implements Controller {
         surveyOptionsField.getChildren().add(box);
     }
 
+    /**
+     * Deletes an option from the survey creation field.
+     *
+     * @param field The text field representing the option.
+     * @param event The action event triggered by clicking the "Remove" button.
+     */
     public void deleteOption(CTextField field, ActionEvent event) {
-        Parent employeeToDelete = ((Node)event.getSource()).getParent();
+        Parent employeeToDelete = ((Node) event.getSource()).getParent();
         System.out.print(employeeToDelete);
         surveyOptionsField.getChildren().remove(employeeToDelete);
         emptyFieldValidator.delete(field);

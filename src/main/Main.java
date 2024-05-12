@@ -22,6 +22,9 @@ public class Main extends Application {
         launch(args);
     }
 
+    /**
+     * starts app
+     */
     @Override
     public void start(Stage stage) throws IOException {
         generateDefaultCorp();
@@ -29,6 +32,9 @@ public class Main extends Application {
         this.router.loadInitialPage(stage);
     }
 
+    /**
+     * create default corporation
+     */
     private void generateDefaultCorp() {
         ArrayList<Employee> employees = new ArrayList<>();
 

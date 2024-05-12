@@ -46,5 +46,5 @@ abstract public class Survey {
         return this.options;
     }
 
-    public void vote(Employee user, ArrayList<String> optionsId) {}
+    abstract public void vote(Employee user, ArrayList<String> optionsId);
 }

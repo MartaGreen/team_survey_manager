@@ -9,6 +9,7 @@ public class SingleChoiceSurvey extends Survey {
         super(name, teams, options, owner);
     }
 
+    @Override
     public void vote(Employee user, ArrayList<String> optionsId) {
         String optionId = optionsId.getFirst();
 
@@ -23,6 +24,4 @@ public class SingleChoiceSurvey extends Survey {
             option.recalculate(votesNumber);
         }
     }
-
-
 }

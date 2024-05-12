@@ -10,6 +10,7 @@ public class MultipleChoiceSurvey extends Survey {
         super(name, teams, options, owner);
     }
 
+    @Override
     public void vote(Employee user, ArrayList<String> optionsId) {
         int votesNumber = 0;
         for (SurveyOption option: options) {
