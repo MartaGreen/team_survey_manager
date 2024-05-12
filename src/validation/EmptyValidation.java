@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @param <T> The type of field to be validated.
  */
 public class EmptyValidation<T> implements ErrorHandler<T> {
+    /** Array of fields for validation */
     private ArrayList<T> validationFields;
 
     /**
@@ -35,17 +36,17 @@ public class EmptyValidation<T> implements ErrorHandler<T> {
      */
     private void startValidation(T field) {
         if (field instanceof CTextField textField) {
-            textField.unhightlight();
+            textField.unhighlight();
             String fieldText = textField.getText();
             if (fieldText.isEmpty()) throw new EmptyException(textField.getName(), textField);
         }
         else if (field instanceof CListView listView) {
-            listView.unhightlight();
+            listView.unhighlight();
             boolean isFieldEmpty = listView.getSelectionModel().getSelectedIndices().isEmpty();
             if (isFieldEmpty) throw new EmptyException(listView.getName(), listView);
         }
         else if (field instanceof CVBox vBox) {
-            vBox.unhightlight();
+            vBox.unhighlight();
             boolean isFieldEmpty = vBox.getChildren().isEmpty();
             if (isFieldEmpty) throw new EmptyException(vBox.getName(), vBox);
         }

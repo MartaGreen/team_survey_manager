@@ -12,9 +12,16 @@ import java.util.ArrayList;
  * Main class for survey management for each interaction connected with surveys.
  */
 public class SurveyManager {
+    /** The list of surveys created in corporation. */
     private final ArrayList<Survey> surveysArr = new ArrayList<>();
+
+    /** The observable list of surveys. */
     private ObservableList<Survey> surveys = FXCollections.observableList(surveysArr);
+
+    /** The list of subscribers for surveys updates. */
     private ArrayList<SurveyObserver> surveySubscribers = new ArrayList<>();
+
+    /** The current state of app. */
     private final Main main;
 
     /**

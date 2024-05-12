@@ -10,15 +10,29 @@ import java.util.UUID;
  * Abstract class representing an employee.
  */
 public abstract class Employee implements SurveyObserver {
+    /** The unique identifier of the employee. */
     private String id;
-    private String name;
-    private String surname;
-    private float experience;
-    private String team;
-    private ArrayList<Survey> surveys;
-    private ArrayList<Survey> personalSurveys;
-    private SurveyManager surveyManager;
 
+    /** The name of the employee. */
+    private String name;
+
+    /** The surname of the employee. */
+    private String surname;
+
+    /** The experience level of the employee. */
+    private float experience;
+
+    /** The team the employee belongs to. */
+    private String team;
+
+    /** The list of surveys available for the employee to participate in. */
+    private ArrayList<Survey> surveys;
+
+    /** The list of surveys owned by the employee. */
+    private ArrayList<Survey> personalSurveys;
+
+    /** The manager responsible for managing surveys for the employee. */
+    private SurveyManager surveyManager;
     /**
      * Constructor for an Employee object with specified attributes.
      * @param name The employee's name.

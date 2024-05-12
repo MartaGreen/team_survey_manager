@@ -15,6 +15,6 @@ public abstract class CustomFieldException extends Error {
      */
     public CustomFieldException(String errMsg, ValidationComponent emptyField) {
         super(errMsg);
-        emptyField.hightlight(); // Highlight the empty field
+        emptyField.highlight(); // Highlight the empty field
     }
 }

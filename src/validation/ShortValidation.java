@@ -10,6 +10,7 @@ import java.util.ArrayList;
  * @param <T> The type of field to be validated.
  */
 public class ShortValidation<T> implements ErrorHandler<T>{
+    /** Array of fields for validation */
     private final ArrayList<T> validationFields;
 
     /**
@@ -35,6 +36,7 @@ public class ShortValidation<T> implements ErrorHandler<T>{
         System.out.print(field + "\n");
 
         if (field instanceof CTextField textField) {
+            textField.unhighlight();
             String fieldText = textField.getText();
             if (fieldText.length() < 4) throw new ShortException(textField.getName(), textField);
         }

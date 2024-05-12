@@ -2,6 +2,8 @@ package validation;
 
 /**
  * Interface for defining error validators.
+ *
+ * @param <T> The type of field to be validated.
  */
 public interface ErrorHandler<T> {
 

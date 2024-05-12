@@ -6,6 +6,7 @@ package validation;
  * @param <T> The type of field to be validated.
  */
 public class Validator<T> {
+    /** The chosen validation strategy */
     private final ErrorHandler<T> validator;
 
     /**

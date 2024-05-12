@@ -20,22 +20,28 @@ import java.util.ArrayList;
  */
 public class MainController implements Controller {
 
+    /** The text field displaying the full name of the user. */
     @FXML
     private Text fullName;
-
+    /** The text field displaying the team of the user. */
     @FXML
     private Text teamLabel;
 
+    /** The list for switching between users. */
     @FXML
     private ComboBox<String> switchBetweenUsersBar;
 
+    /** The container for personal surveys. */
     @FXML
     private VBox personalSurveysBox;
-
+    /** The container for opened surveys. */
     @FXML
     private VBox openedSurveysBox;
 
+    /** The current logged-in(chosen) user. */
     private Employee user;
+
+    /** The current state of app. */
     private Main main;
 
     /**

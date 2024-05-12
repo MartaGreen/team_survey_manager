@@ -23,27 +23,37 @@ import java.util.ArrayList;
  * Controller for a new survey page.
  */
 public class NewSurveyController implements Controller {
+    /** The custom text field for the survey name. */
     @FXML
     private CTextField surveyNameField;
 
+    /** The text area for the survey description. */
     @FXML
     private TextArea surveyDescriptionField;
 
+    /** The custom list for selecting teams. */
     @FXML
     private CListView teamsBox;
 
+    /** The container for survey options. */
     @FXML
     private CVBox surveyOptionsField;
 
+    /** The checkbox for selecting multiple choice. */
     @FXML
     private CheckBox multipleChoiceSetter;
 
+    /** The label for displaying error messages. */
     @FXML
     private Label errorMsg;
 
+    /** The main instance. */
     private Main main;
 
+    /** The validator for empty fields. */
     private Validator<ValidationComponent> emptyFieldValidator;
+
+    /** The validator for short fields. */
     private Validator<ValidationComponent> shortFieldValidator;
 
     /**

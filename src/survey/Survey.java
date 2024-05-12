@@ -9,11 +9,34 @@ import java.util.UUID;
  * Abstract class representing a survey.
  */
 abstract public class Survey {
+    /**
+     * The unique ID of the survey.
+     */
     private String surveyId;
+
+    /**
+     * The description of the survey.
+     */
     private String description;
+
+    /**
+     * The name of the survey.
+     */
     private final String name;
+
+    /**
+     * The owner of the survey.
+     */
     private final Employee owner;
+
+    /**
+     * The names of the teams eligible to participate in the survey.
+     */
     private final ArrayList<String> participantTeams;
+
+    /**
+     * The survey's available voting options.
+     */
     protected ArrayList<SurveyOption> options;
 
     /**

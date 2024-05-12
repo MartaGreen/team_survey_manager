@@ -10,8 +10,11 @@ import java.util.ArrayList;
  * Represents a corporation class.
  */
 public class Corporation {
+    /** The name of corporation. */
     private final String name;
+    /** The array of employees working in this corporation. */
     private final ArrayList<Employee> employees;
+    /** Corporation main survey manager. */
     public final SurveyManager surveyManager;
 
     /**

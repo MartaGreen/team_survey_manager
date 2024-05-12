@@ -10,10 +10,16 @@ import java.util.UUID;
  * Class representing an option in a survey.
  */
 public class SurveyOption {
+    /** The list of employees who has voted for this option. */
     private final ArrayList<Employee> voters = new ArrayList<>();
 
+    /** The name of the survey option. */
     private String name;
+
+    /** The unique ID of the survey option. */
     private String optionId;
+
+    /** Calculated percentage of votes for this option. */
     public double percentage;
 
     /**

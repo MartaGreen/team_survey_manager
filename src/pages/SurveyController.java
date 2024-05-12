@@ -24,13 +24,18 @@ import java.util.ArrayList;
  * Controller survey interactions page.
  */
 public class SurveyController implements Controller {
+    /** The text field for the survey name. */
     @FXML
     private Text surveyName;
 
+    /** The container for survey options. */
     @FXML
     private VBox surveyOptionsBox;
 
+    /** The toggle group container for options. */
     private ToggleGroup optionsGroup;
+
+    /** The current state of app. */
     private Main main;
 
     /**

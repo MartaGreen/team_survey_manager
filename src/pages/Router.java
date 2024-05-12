@@ -14,6 +14,7 @@ import java.io.IOException;
  * Class responsible for routing (navigation) between different pages in a JavaFX application.
  */
 public class Router {
+    /** The current state of app. */
     Main main;
 
     /**
