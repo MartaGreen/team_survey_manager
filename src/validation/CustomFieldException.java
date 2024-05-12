@@ -1,11 +1,20 @@
 package validation;
 
-import javafx.scene.control.TextField;
 import validation.components.ValidationComponent;
 
-public class CustomFieldException extends Error{
+/**
+ * Custom abstract exception class for creation custom exceptions.
+ */
+public abstract class CustomFieldException extends Error {
+
+    /**
+     * Constructor for a CustomFieldException with an error message and highlighting of the empty field.
+     *
+     * @param errMsg      The error message to be displayed.
+     * @param emptyField  The empty field causing the exception.
+     */
     public CustomFieldException(String errMsg, ValidationComponent emptyField) {
         super(errMsg);
-        emptyField.hightlight();
+        emptyField.hightlight(); // Highlight the empty field
     }
 }
