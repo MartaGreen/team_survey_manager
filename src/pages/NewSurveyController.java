@@ -153,7 +153,7 @@ public class NewSurveyController implements Controller {
         optionName.setPrefWidth(500);
         optionName.setFont(Font.font(14));
         optionName.getStyleClass().add("optionName");
-        surveyNameField.setName("Option field");
+        optionName.setName("Option field");
         emptyFieldValidator.add(optionName);
         shortFieldValidator.add(optionName);
 

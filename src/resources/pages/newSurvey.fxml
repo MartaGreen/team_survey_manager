@@ -65,7 +65,7 @@
             <Font size="14.0" />
          </font>
       </CheckBox>
-      <Label fx:id="errorMsg" layoutX="210.0" layoutY="14.0" prefHeight="20.0" prefWidth="380.0" textFill="RED">
+      <Label fx:id="errorMsg" layoutX="175.0" layoutY="14.0" prefHeight="20.0" prefWidth="500.0" textFill="RED" alignment="CENTER">
          <font>
             <Font size="16.0" />
          </font>
