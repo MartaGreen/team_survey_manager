@@ -12,6 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import validation.components.CTextField?>
+<?import validation.components.CListView?>
+<?import validation.components.CVBox?>
 <AnchorPane prefHeight="850.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pages.NewSurveyController">
    <children>
       <Text layoutX="309.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Survey">
@@ -24,11 +27,11 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="surveyNameField" layoutX="79.0" layoutY="179.0" prefHeight="31.0" prefWidth="641.0" promptText="name">
+      <CTextField fx:id="surveyNameField" layoutX="79.0" layoutY="179.0" prefHeight="31.0" prefWidth="641.0" promptText="name">
          <font>
             <Font size="16.0" />
          </font>
-      </TextField>
+      </CTextField>
       <Button layoutX="711.0" layoutY="801.0" mnemonicParsing="false" onAction="#createSurvey" text="Create">
          <font>
             <Font size="18.0" />
@@ -42,7 +45,7 @@
       <TextArea fx:id="surveyDescriptionField" layoutX="79.0" layoutY="258.0" prefHeight="99.0" prefWidth="641.0" />
       <ScrollPane layoutX="79.0" layoutY="488.0" prefHeight="291.0" prefWidth="641.0">
          <content>
-            <VBox fx:id="surveyOptionsField" prefHeight="283.0" prefWidth="628.0" />
+            <CVBox fx:id="surveyOptionsField" prefHeight="283.0" prefWidth="628.0" />
          </content>
       </ScrollPane>
       <Button layoutX="645.0" layoutY="451.0" mnemonicParsing="false" onAction="#addOption" text="add option" />
@@ -56,11 +59,16 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ListView fx:id="participantsBox" layoutX="281.0" layoutY="366.0" prefHeight="74.0" prefWidth="439.0" />
+      <CListView fx:id="teamsBox" layoutX="281.0" layoutY="366.0" prefHeight="74.0" prefWidth="439.0" />
       <CheckBox fx:id="multipleChoiceSetter" layoutX="606.0" layoutY="148.0" mnemonicParsing="false" text="multiple choice">
          <font>
             <Font size="14.0" />
          </font>
       </CheckBox>
+      <Label fx:id="errorMsg" layoutX="175.0" layoutY="14.0" prefHeight="20.0" prefWidth="500.0" textFill="RED" alignment="CENTER">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
